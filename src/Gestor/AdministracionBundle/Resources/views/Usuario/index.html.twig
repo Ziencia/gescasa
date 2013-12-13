@@ -1,0 +1,71 @@
+{# empty Twig template #}
+{% extends '::administracion.html.twig' %}
+
+{% block id 'usuario_listar' %}
+{% block title %}Listado de usuarios{% endblock %}
+
+{% block contenido %}
+<h2>{{ block('title') }}</h2>
+<div class="limpiar"></div>
+
+<table class="tabla_datos">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>TIP</th>
+            <th>F. de alta</th>
+            <th>F. de baja</th>
+            <th>DNI</th>
+            <th>Autorizado</th>
+            <th>ROL</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for usuario in entities %}
+            {% if loop.index is even %}
+                <tr class="fila_par">
+            {% else %}
+                <tr class="fila_impar">
+            {% endif %}
+            <td>{{ usuario.nombre ~ " " ~ usuario.apellidos }}</td>
+            <td>{{ usuario.tip }}</td>
+            <td>{{ usuario.fechaAlta|date("d/m/Y") }}</td>
+            <td> {% if null!=usuario.fechaBaja %}
+                    {{ usuario.fechaBaja|date("d/m/Y") }}                
+                 {% endif %}
+            </td>
+            <td>{{ usuario.dni }}</td>
+            <td class="tabla_columna_centrada"> 
+                {{ usuario.autorizado ? '<span class="autorizado">&#10004;</span>' : '<span class="no_autorizado">&#10008;</span>' }}
+            </td>
+            <td>{{ usuario.roles[0] }}</td>
+            <td class="tabla_columna_centrada"> 
+                <ul>
+                    <li>
+                        <a href="{{ path('administracion_usuario_ver', { 'id': usuario.id }) }}"><img src="{{ asset('bundles/usuario/images/Search.png') }}" alt="Detalles" title="Detalles" class="imagen_pequeña"/></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('administracion_usuario_editar', { 'id': usuario.id }) }}"><img src="{{ asset('bundles/usuario/images/Writing.png') }}" alt="Editar" title="Editar" class="imagen_pequeña"/></a>
+                    </li>
+                    <li>
+                        <a href="###"><img src="{{ asset('bundles/usuario/images/Word-Processor.png') }}" alt="Mensajes" title="Mensajes" class="imagen_pequeña"/></a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% include 'AdministracionBundle:Default:paginador.html.twig'  with { 'ruta': 'administracion_usuario' } only %}
+ <div class="contenedor_administrador_acciones">
+    <ul class="administrador_acciones">
+        <li>
+            <input type="button" value="Añadir un nuevo usuario" class="boton" onclick="window.location='{{ path('administracion_usuario_crear') }}';"/>               
+        </li>
+        <li>
+            <input type="button" value="Mostrar solo autorizados" class="boton" onclick="window.location='{{ path('administracion_usuario_listar_autorizados') }}';"/>               
+        </li>
+    </ul>
+ </div>
+{% endblock contenido%}

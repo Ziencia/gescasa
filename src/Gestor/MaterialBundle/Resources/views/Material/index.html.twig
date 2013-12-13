@@ -1,0 +1,283 @@
+{% extends 'ExpedientesBundle:Expediente:expedientes.html.twig' %}
+
+{% block stylesheets %}
+<link href="{{ asset('bundles/expedientes/css/expedientes.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('bundles/material/css/material.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block id 'expediente_indice' %}
+{% block title %}Añadir material al expediente {{expediente_ref}}{% endblock %}
+
+{% block contenido %}
+    <h2>{{ block('title') }}</h2>
+    <div class="limpiar"></div>
+    
+    <div id="material_nav">
+        <nav>
+                <ul>
+                    <li><a href="{{ path('material_automocion', { 'id': expediente_id }) }}">AUTOMOCION</a>
+                    <li><a href="{{ path('material_informatico', { 'id': expediente_id }) }}">INFORMATICA</a></li>
+                    <li><a href="{{ path('material_mobiliario', { 'id': expediente_id }) }}">MOBILIARIO</a></li>
+                    <li><a href="{{ path('material_operativo', { 'id': expediente_id }) }}">OPERATIVO</a></li>
+                    <li><a href="{{ path('material_vestuario', { 'id': expediente_id }) }}">VESTUARIO</a></li>
+                </ul>
+        </nav>
+    </div>
+    <div class="limpiar"></div>
+    
+    {% block contenidoMaterial %}
+        <div class="expedientes_info">Seleccione la categoría del material que desea añadir al expediente</div>
+    
+        {% if informatica %}
+            <section class="listado_materiales">
+                <div class="expedientes_info">Material informático del expediente {{expediente_ref}}</div>
+                {% for material in informatica %}
+                    <table class="tabla_datos_material_informatico">
+                         {% if loop.index is even %}
+                                <tbody class="fila_par">
+                         {% else %}
+                                <tbody class="fila_impar">
+                         {% endif %}
+                                <tr>
+                                    <td title="{{ material.tipo }}"><label>Tipo:</label> {{ material.tipo }}</td>
+                                    <td title="{{ material.marca}}"><label>Marca:</label> {{material.marca }}</td>
+                                    <td title="{{ material.modelo}}"><label>Modelo:</label> {{ material.modelo }}</td>
+                                    <td title="{{ material.numserie|default('')}}"><label>N. Serie:</label> {{ material.numserie|default('') }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" title="{{ material.descripcion|default('')}}"><label>Descripción:</label> {{material.descripcion|default('')}}</td>
+                                </tr>       
+                                <tr>
+                                    <td colspan="4" title="{{ material.caracteristicas|default('')}}"><label>Caracteristicas:</label> {{material.caracteristicas|default('')}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" title="{{ material.observaciones|default('')}}"><label>Observaciones:</label> {{material.observaciones|default('')}}</td>
+                                </tr>
+                                <tr>
+                                    <td title="{{ material.destino|default('')}}"><label>Destino:</label> {{material.destino|default('')}}</td>
+                                    <td title="{{ material.cantidad|default('')}}"><label>Cantidad:</label> {{material.cantidad|default('')}}</td>
+                                    <td></td>
+                                    <td><label class="acciones">Acciones:</label>
+                                        <nav>
+                                          <ul>
+                                            <li>
+                                                <a href="{{ path('material_informatico_ver', { 'id': material.id }) }}"><img src="{{ asset('bundles/usuario/images/Search.png') }}" alt="Detalles" title="Detalles" class="imagen_pequeña"/></a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('material_informatico_editar', { 'id': material.id }) }}"><img src="{{ asset('bundles/usuario/images/Writing.png') }}" alt="Editar" title="Editar" class="imagen_pequeña"/></a>
+                                            </li>
+                                          </ul>
+                                        </nav>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+               {% endfor %}
+
+            </section>
+        {% endif %}
+        <div class="limpiar"></div>
+        
+        {% if policial %}
+            <section class="listado_materiales">
+                <div class="expedientes_info">Material operativo del expediente {{expediente_ref}}</div>
+                {% for material in policial %}
+                    <table class="tabla_datos_material_informatico">
+                         {% if loop.index is even %}
+                                <tbody class="fila_par">
+                         {% else %}
+                                <tbody class="fila_impar">
+                         {% endif %}
+                                <tr>
+                                    <td title="{{ material.tipo }}"><label>Tipo:</label> {{ material.tipo }}</td>
+                                    <td title="{{ material.marca}}"><label>Marca:</label> {{material.marca }}</td>
+                                    <td title="{{ material.modelo}}"><label>Modelo:</label> {{ material.modelo }}</td>
+                                    <td title="{{ material.numserie|default('')}}"><label>N. Serie:</label> {{ material.numserie|default('') }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" title="{{ material.descripcion|default('')}}"><label>Descripción:</label> {{material.descripcion|default('')}}</td>
+                                </tr>       
+                                <tr>
+                                    <td colspan="4" title="{{ material.observaciones|default('')}}"><label>Observaciones:</label> {{material.observaciones|default('')}}</td>
+                                </tr>
+                                <tr>
+                                    <td title="{{ material.destino|default('')}}"><label>Destino:</label> {{material.destino|default('')}}</td>
+                                    <td title="{{ material.cantidad|default('')}}"><label>Cantidad:</label> {{material.cantidad|default('')}}</td>
+                                    <td title="{{ material.talla|default('')}}"><label>Talla:</label> {{material.talla|default('')}}</td>
+                                    <td><label class="acciones">Acciones:</label>
+                                        <nav>
+                                          <ul>
+                                            <li>
+                                                <a href="{{ path('material_operativo_ver', { 'id': material.id }) }}"><img src="{{ asset('bundles/usuario/images/Search.png') }}" alt="Detalles" title="Detalles" class="imagen_pequeña"/></a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('material_operativo_editar', { 'id': material.id }) }}"><img src="{{ asset('bundles/usuario/images/Writing.png') }}" alt="Editar" title="Editar" class="imagen_pequeña"/></a>
+                                            </li>
+                                          </ul>
+                                        </nav>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+               {% endfor %}
+
+            </section>
+        {% endif %}
+               <div class="limpiar"></div> 
+         {% if mobiliario %}
+            <section class="listado_materiales">
+                <div class="expedientes_info">Material mobiliario del expediente {{expediente_ref}}</div>
+                {% for material in mobiliario %}
+                    <table class="tabla_datos_material_informatico">
+                         {% if loop.index is even %}
+                                <tbody class="fila_par">
+                         {% else %}
+                                <tbody class="fila_impar">
+                         {% endif %}
+                                <tr>
+                                    <td title="{{ material.tipo }}"><label>Tipo:</label> {{ material.tipo }}</td>
+                                    <td title="{{ material.marca}}"><label>Marca:</label> {{material.marca }}</td>
+                                    <td title="{{ material.modelo}}"><label>Modelo:</label> {{ material.modelo }}</td>
+                                    <td title="{{ material.numserie|default('')}}"><label>N. Serie:</label> {{ material.numserie|default('') }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" title="{{ material.descripcion|default('')}}"><label>Descripción:</label> {{material.descripcion|default('')}}</td>
+                                </tr>       
+                                <tr>
+                                    <td title="{{ material.largo|default('')}}"><label>Largo:</label> {{material.largo|default('')}} cm</td>
+                                    <td title="{{ material.ancho|default('')}}"><label>Ancho:</label> {{material.ancho|default('')}} cm</td>
+                                    <td colspan="2" title="{{ material.alto|default('')}}"><label>Alto:</label> {{material.alto|default('')}} cm</td>                               
+                               
+                                </tr>
+                                <tr>
+                                    <td colspan="4" title="{{ material.observaciones|default('')}}"><label>Observaciones:</label> {{material.observaciones|default('')}}</td>
+                                </tr>
+                                <tr>
+                                    <td title="{{ material.destino|default('')}}"><label>Destino:</label> {{material.destino|default('')}}</td>
+                                    <td title="{{ material.cantidad|default('')}}"><label>Cantidad:</label> {{material.cantidad|default('')}}</td>
+                                    <td></td>
+                                    <td><label class="acciones">Acciones:</label>
+                                        <nav>
+                                          <ul>
+                                            <li>
+                                                <a href="{{ path('material_mobiliario_ver', { 'id': material.id }) }}"><img src="{{ asset('bundles/usuario/images/Search.png') }}" alt="Detalles" title="Detalles" class="imagen_pequeña"/></a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('material_mobiliario_editar', { 'id': material.id }) }}"><img src="{{ asset('bundles/usuario/images/Writing.png') }}" alt="Editar" title="Editar" class="imagen_pequeña"/></a>
+                                            </li>
+                                          </ul>
+                                        </nav>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+               {% endfor %}
+
+            </section>
+        {% endif %}       
+        
+                <div class="limpiar"></div>
+                
+         {% if automocion %}
+            <section class="listado_materiales">
+                <div class="expedientes_info">Material de automoción del expediente {{expediente_ref}}</div>
+                {% for material in automocion %}
+                    <table class="tabla_datos_material_informatico">
+                         {% if loop.index is even %}
+                                <tbody class="fila_par">
+                         {% else %}
+                                <tbody class="fila_impar">
+                         {% endif %}
+                                <tr>
+                                    <td title="{{ material.tipo }}"><label>Tipo:</label> {{ material.tipo }}</td>
+                                    <td title="{{ material.marca}}"><label>Marca:</label> {{material.marca }}</td>
+                                    <td title="{{ material.modelo}}"><label>Modelo:</label> {{ material.modelo }}</td>
+                                    <td title="{{ material.numserie|default('')}}"><label>N. Serie:</label> {{ material.numserie|default('') }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" title="{{ material.descripcion|default('')}}"><label>Descripción:</label> {{material.descripcion|default('')}}</td>
+                                </tr>       
+                                <tr>
+                                    <td title="{{ material.bastidor|default('')}}"><label>Bastidor:</label> {{material.bastidor|default('')}}</td>
+                                    <td title="{{ material.concesionario|default('')}}"><label>Concesionario:</label> {{material.concesionario|default('')}}</td>
+                                    <td title="{{ material.kit|default('')}}"><label>Kit:</label> {{material.kit|default('')}}</td>                               
+                                    <td title="{{ material.motor|default('')}}"><label>Motor:</label> {{material.motor|default('')}}</td>  
+                                </tr>
+                                <tr>
+                                    <td colspan="2" title="{{ material.observaciones|default('')}}"><label>Observaciones:</label> {{material.observaciones|default('')}}</td>
+                                    <td title="{{ material.color|default('')}}"><label>Color:</label> {{material.color|default('')}}</td>                               
+                                    <td title="{{ material.matricula|default('')}}"><label>Matricula:</label> {{material.matricula|default('')}}</td>                    
+                                </tr>
+                                <tr>
+                                    <td title="{{ material.destino|default('')}}"><label>Destino:</label> {{material.destino|default('')}}</td>
+                                    <td title="{{ material.cantidad|default('')}}"><label>Cantidad:</label> {{material.cantidad|default('')}}</td>
+                                    <td></td>
+                                    <td><label class="acciones">Acciones:</label>
+                                        <nav>
+                                          <ul>
+                                            <li>
+                                                <a href="{{ path('material_automocion_ver', { 'id': material.id }) }}"><img src="{{ asset('bundles/usuario/images/Search.png') }}" alt="Detalles" title="Detalles" class="imagen_pequeña"/></a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('material_automocion_editar', { 'id': material.id }) }}"><img src="{{ asset('bundles/usuario/images/Writing.png') }}" alt="Editar" title="Editar" class="imagen_pequeña"/></a>
+                                            </li>
+                                          </ul>
+                                        </nav>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+               {% endfor %}
+
+            </section>
+        {% endif %}       
+         <div class="limpiar"></div>
+         {% if vestuario %}
+            <section class="listado_materiales">
+                <div class="expedientes_info">Material de vestuario del expediente {{expediente_ref}}</div>
+                {% for material in vestuario %}
+                    <table class="tabla_datos_material_informatico">
+                         {% if loop.index is even %}
+                                <tbody class="fila_par">
+                         {% else %}
+                                <tbody class="fila_impar">
+                         {% endif %}
+                                <tr>
+                                    <td title="{{ material.tipo }}"><label>Tipo:</label> {{ material.tipo }}</td>
+                                    <td title="{{ material.marca}}"><label>Marca:</label> {{material.marca }}</td>
+                                    <td title="{{ material.modelo}}"><label>Modelo:</label> {{ material.modelo }}</td>
+                                    <td title="{{ material.numserie|default('')}}"><label>N. Serie:</label> {{ material.numserie|default('') }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" title="{{ material.descripcion|default('')}}"><label>Descripción:</label> {{material.descripcion|default('')}}</td>
+                                </tr>       
+                                <tr>
+                                    <td colspan="4" title="{{ material.observaciones|default('')}}"><label>Observaciones:</label> {{material.observaciones|default('')}}</td>
+                                </tr>
+                                <tr>
+                                    <td title="{{ material.talla|default('')}}"><label>Talla:</label> {{material.talla|default('')}}</td>
+                                    <td title="{{ material.color|default('')}}"><label>Color:</label> {{material.color|default('')}}</td>
+                                    <td title="{{ material.sexo|default('')}}"><label>Sexo:</label> {{material.sexo|default('')}}</td>
+                                    <td><label class="acciones">Acciones:</label>
+                                        <nav>
+                                          <ul>
+                                            <li>
+                                                <a href="{{ path('material_vestuario_ver', { 'id': material.id }) }}"><img src="{{ asset('bundles/usuario/images/Search.png') }}" alt="Detalles" title="Detalles" class="imagen_pequeña"/></a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('material_vestuario_editar', { 'id': material.id }) }}"><img src="{{ asset('bundles/usuario/images/Writing.png') }}" alt="Editar" title="Editar" class="imagen_pequeña"/></a>
+                                            </li>
+                                          </ul>
+                                        </nav>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+               {% endfor %}
+
+            </section>
+        {% endif %}
+                
+    {% endblock contenidoMaterial %}
+        
+{%endblock contenido %}

@@ -1,0 +1,16 @@
+parameters:
+#    usuario.example.class: Gestor\UsuarioBundle\Example    
+
+services:
+   login_listener:
+       class: Gestor\UsuarioBundle\Listener\LoginListener
+       arguments: ['@security.context', '@router', '@doctrine']
+       tags:
+         - { name: kernel.event_listener, event: security.interactive_login }
+         - { name: kernel.event_listener, event: kernel.response }
+            
+   gestor_handler.logout_success_handler:
+        class: Gestor\UsuarioBundle\Listener\LogoutSuccessHandler
+        arguments: ['@security.context', '@router', '@doctrine']
+        tags:
+           - { name: 'monolog.logger', channel: 'security' }          

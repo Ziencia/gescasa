@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>GESTOR DE EXPEDIENTES - {{ "now"|date("Y") }} - {% block title %}{% endblock %}</title>
+        <link href="{{ asset('bundles/usuario/css/generico.css') }}" rel="stylesheet" type="text/css" />
+        {% block stylesheets %}{% endblock %}
+        {% block javascript %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body id="{% block id ' ' %}">
+        <div id="contenedor">
+            <div id="pagina">
+                <div id="banner">
+                    <div id=usuario><strong>Ha iniciado sesión como: {{ app.user.tip }} <a href="{{ path('usuario_logout') }}">(Salir)</a> - {{ "now" | date('d/m/Y')}}</strong></div>                
+                </div>
+                <div class="limpiar"></div>
+                <div id="header">
+                    {% block header %}{% endblock header%}
+                </div>
+                <div class="limpiar"></div>
+                <div id="content">
+                    {% block body %}{% endblock body%}    
+                </div>
+                <div class="limpiar"></div>
+                <div id="footer">
+                    <div id="footer2">
+                        <strong>COPYRIGHT &copy; GESTOR DE EXPEDIENTES - {{ "now"|date("Y") }}</strong>  | 
+                        <a href="{{ path('expediente_indice') }}">Expedientes</a> | 
+                        <a href="{{ path('gestion_indice') }}">Gestión</a> | 
+                        <a href="{{ path('administracion_usuario') }}">Administración</a> | 
+                        <a href="#">Ayuda</a>
+                        <p>Programación y diseño: AMR.</p>
+                    </div>
+                </div>
+                <div class="limpiar"></div>
+                {% block javascripts %}{% endblock %}
+            </div>
+         </div>
+    </body>    
+</html>

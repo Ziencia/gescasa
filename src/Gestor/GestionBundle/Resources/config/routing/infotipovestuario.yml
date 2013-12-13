@@ -1,0 +1,16 @@
+vestuario_index:
+    pattern:  /
+    defaults: { _controller: "GestionBundle:infoTipoVestuario:index" }
+
+vestuario_new:
+    pattern:  /nuevo
+    defaults: { _controller: "GestionBundle:infoTipoVestuario:new" }
+
+vestuario_edit:
+    pattern:  /{id}/editar
+    defaults: { _controller: "GestionBundle:infoTipoVestuario:edit" }
+
+vestuario_update:
+    pattern:  /{id}/actualizar
+    defaults: { _controller: "GestionBundle:infoTipoVestuario:update" }
+    requirements: { _method: post|put }

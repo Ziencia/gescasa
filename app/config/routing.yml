@@ -1,0 +1,43 @@
+mensaje:
+    resource: "@MensajeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+expedientes:
+    resource: "@ExpedientesBundle/Resources/config/expediente.yml"
+    prefix:   /expediente
+
+material:
+    resource: "@MaterialBundle/Resources/config/material.yml"
+    prefix:   /material
+    
+portada:
+    path: /
+    defaults: { _controller: UsuarioBundle:Default:index }
+    
+usuario_login:
+    path: /login
+    defaults: { _controller: UsuarioBundle:Default:login }
+
+usuario_login_check:
+  path: /login_check
+
+usuario_logout:
+  path: /logout
+  defaults: { _controller: UsuarioBundle:Default:logout }
+  
+# Rutas importadas del bundle UsuarioBundle
+administracion:
+  path: /administracion/
+  defaults: { _controller: AdministracionBundle:Usuario:index }
+ #   resource: "@UsuarioBundle/Resources/config/routing.yml"
+ #   prefix:   /administracion
+    
+# Rutas importadas del bundle AdministracionBundle
+administracion_usuario:
+    resource: "@AdministracionBundle/Resources/config/usuario.yml"
+    prefix:   /administracion/usuario
+    
+gestion:
+    resource: "@GestionBundle/Resources/config/gestion.yml"
+    prefix: /gestion
+    

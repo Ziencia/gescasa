@@ -1,0 +1,201 @@
+
+.formulario_registro_usuario .formulario_input_textarea{
+    width: 300px;
+    margin: 5px; 
+    font-size: 1.4em;
+    color: #000066;
+    border: 1px solid #000066;
+    background: #DBF1FF;
+    height:70px;
+}
+.formulario_registro_usuario .formulario_input_textarea:hover{
+    border: 1px solid #000066;
+    background: #9CB8DD;
+}
+.formulario_registro_usuario input,.formulario_registro_usuario select{
+    width: 300px;
+}
+.formulario_registro_usuario select{
+    width:302px;
+}
+
+.listado_expedientes{
+    text-align:center;
+}
+
+article{
+    border: 6px solid #000066;
+    background-color: #9CB8DD;
+    float: left;
+    padding: 15px;
+    width: 288px;
+    -webkit-box-shadow: 5px 5px 20px 2px #0B5F89,2px 2px 2px 2px #c3e4f5 inset;
+    -moz-box-shadow: 5px 5px 20px 2px #0B5F89,2px 2px 2px 2px #c3e4f5 inset;
+    box-shadow: 5px 5px 20px 2px #0B5F89,2px 2px 2px 2px #c3e4f5 inset;
+    border-top-left-radius: 60px 90px;
+    border-bottom-right-radius: 60px 90px;
+    color: #000066;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+article p{
+    margin-bottom: 20px;
+}
+
+#expediente_lateral{
+
+}
+
+#expediente_centro{
+    margin-right:12px;
+    margin-left:12px;
+}
+
+#expediente_referencia{
+    font-size: x-large;
+    margin-top: -40px;
+    margin-bottom: 20px;
+}
+
+#expediente_filtrar{
+    font-weight: bold;
+    display: inline-block;
+    color: #000066;
+    margin-left: 835px;
+    margin-top: 5px;
+}
+
+#expediente_titulo{
+    font-weight: bold;
+    font-size: large;
+}
+
+#expediente_titulo_wrap{
+    font-weight:bold;
+    height:50px;
+}
+
+#expediente_fecha{
+    margin-left: -100px;
+}
+
+.imagen_mediana{
+    height: 35px;
+    width: 35px;
+}
+
+.imagen_expediente{
+    top: 0px;
+    left: -90px;
+    position: relative;
+}
+
+.imagen_estado{
+    top: 0px;
+    right: -90px;
+    position: relative;
+}
+
+#tabla_expedientes td{
+    overflow: hidden;
+}
+
+#expediente_tabla_titulo_wrap{
+
+}
+
+#col_exp_ref{
+    width:77px;
+}
+
+#col_exp_est{
+    width:30px;
+}
+
+#col_exp_ini{
+    width:100px;
+}
+
+.col_exp_fecha{
+    width:94px;
+}
+
+#col_exp_imp{
+    width:100px;
+}
+
+#col_exp_ira{
+    width:89px;
+}
+
+#expediente_filtro{
+    width:100%;
+    display:inline-block;
+}
+
+#expediente_filtro img{
+    width:32px;
+    height:32px;    
+    float:right;
+}
+
+#buscar {
+    display: inline-block;
+    margin-left: 560px;
+    position:absolute;
+}
+
+
+#buscar input[type="search"] {
+    background: url('../images/search-white.png') no-repeat 10px 6px #9CB8DD;
+    border: 2px solid #000066;
+    font-size: medium;
+    color: #000066;
+    width:200px;
+    padding: 6px 15px 6px 35px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); 
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+    }
+
+#buscar input[type="search"]:focus {
+    outline:none; 
+    box-shadow:none;
+    width: 270px;
+    }
+    
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #000066;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #000066;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #000066;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #000066;
+}
+
+#expediente_buscar_fecha{
+    margin-left: 215px;
+    width: 300px;
+    text-align: left;
+}
+
+.expedientes_info{
+   font-weight: bold;
+    font-size: large;
+    margin: 15px 0px 5px 0px;
+    color: #000066;
+    text-align: center;
+}

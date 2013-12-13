@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<orm-designer version="2.2.4.749" name="Gescasa" mvc="Symfony2" orm="Doctrine2" uuid="e4692a92-d3ee-4384-933f-47e00c47d8c5">
+  <external-module storage-path="src/gestor/UsuarioBundle/Entity/Entity.module.xml"/>
+  <visual-data>
+    <entity uuid="98fa327b-42dd-4c92-a015-fc9def7b7bf9" position-x="254" position-y="38" size-x="0" size-x2="103" size-y="0" size-y2="73"/>
+    <entity uuid="c400d030-3150-436b-8c2f-aeca0371c209" position-x="10" position-y="37" size-x="0" size-x2="117" size-y="0" size-y2="171"/>
+    <module uuid="c7cd875a-8f1a-4039-9c98-49d24f1cccf4" bk-color="4294375930" position-x="50" position-y="50" size-x="0" size-x2="496" size-y="0" size-y2="231"/>
+    <project uuid="e4692a92-d3ee-4384-933f-47e00c47d8c5" size-x="0" size-x2="634" size-y="0" size-y2="331"/>
+  </visual-data>
+</orm-designer>

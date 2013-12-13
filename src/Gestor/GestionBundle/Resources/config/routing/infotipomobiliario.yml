@@ -1,0 +1,16 @@
+mobiliario_index:
+    pattern:  /
+    defaults: { _controller: "GestionBundle:infoTipoMobiliario:index" }
+
+mobiliario_new:
+    pattern:  /nuevo
+    defaults: { _controller: "GestionBundle:infoTipoMobiliario:new" }
+
+mobiliario_edit:
+    pattern:  /{id}/editar
+    defaults: { _controller: "GestionBundle:infoTipoMobiliario:edit" }
+
+mobiliario_update:
+    pattern:  /{id}/actualizar
+    defaults: { _controller: "GestionBundle:infoTipoMobiliario:update" }
+    requirements: { _method: post|put }

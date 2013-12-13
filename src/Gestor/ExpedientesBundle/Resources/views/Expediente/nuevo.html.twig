@@ -1,0 +1,88 @@
+{% extends 'ExpedientesBundle:Expediente:expedientes.html.twig' %}
+{% form_theme formulario 'AdministracionBundle:Form:errores.html.twig' %}
+
+{% block id 'expediente_nuevo' %}
+{% block title %}Añadir un nuevo expediente{% endblock %}
+
+{% block contenido %}
+    <h2>{{ block('title') }}</h2>
+    <div class="limpiar"></div>
+
+<form action="{{ path('expediente_crear') }}" method="post" {{form_enctype(formulario)}} class="formulario_registro_usuario">
+    {{ form_errors(formulario) }}
+        
+        <fieldset>
+            <legend><h3>Datos del expediente</h3></legend>
+            
+            <div>
+                {{ form_errors(formulario.titulo) }}
+                {{ form_label(formulario.titulo)  }}                
+                {{ form_widget(formulario.titulo, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.referencia) }}
+                {{ form_label(formulario.referencia)  }}                
+                {{ form_widget(formulario.referencia, { 'attr': { 'class': 'formulario_input' } }) }}
+                <p class="ayuda">Debe de ser en formato YYYY/DDD. Ej.: 2013/001</p>
+            </div>
+            <div>
+                {{ form_errors(formulario.estado) }}
+                {{ form_label(formulario.estado)  }}                
+                {{ form_widget(formulario.estado, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.empresa) }}
+                {{ form_label(formulario.empresa)  }}                
+                {{ form_widget(formulario.empresa, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.adjudicatario) }}
+                {{ form_label(formulario.adjudicatario)  }}                
+                {{ form_widget(formulario.adjudicatario, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.fechaInicio) }}
+                {{ form_label(formulario.fechaInicio)  }}                
+                {{ form_widget(formulario.fechaInicio, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.fechaFin) }}
+                {{ form_label(formulario.fechaFin)  }}                
+                {{ form_widget(formulario.fechaFin, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.importe) }}
+                {{ form_label(formulario.importe)  }}                
+                {{ form_widget(formulario.importe, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.descripcion0) }}
+                {{ form_label(formulario.descripcion0)  }}                
+                {{ form_widget(formulario.descripcion0, { 'attr': { 'class': 'formulario_input_textarea' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.descripcion1) }}
+                {{ form_label(formulario.descripcion1)  }}                
+                {{ form_widget(formulario.descripcion1, { 'attr': { 'class': 'formulario_input_textarea' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.descripcion2) }}
+                {{ form_label(formulario.descripcion2)  }}                
+                {{ form_widget(formulario.descripcion2, { 'attr': { 'class': 'formulario_input_textarea' } }) }}
+            </div>    
+            {{ form_rest(formulario) }}
+            
+        </fieldset>
+        <div class="contenedor_administrador_acciones">
+            <ul class="administrador_acciones">
+                <li>
+                    <input class="boton" type="submit" value="Dar de alta" />
+                </li>
+                <li>
+                    <input type="button" value="Volver al listado" class="boton" onclick="window.location='{{ path('expediente_indice') }}';"/>               
+                </li>
+            </ul>
+            </div>
+</form>
+
+{%endblock contenido %}

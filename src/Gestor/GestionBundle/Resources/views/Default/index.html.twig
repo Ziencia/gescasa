@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+<link href="{{ asset('bundles/gestion/css/gestion.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block header %}
+        <nav>
+            <ul>
+                <li><a href="{{ path('adjudicatario_index') }}">ADJUDICATARIOS</a>
+                <li><a href="{{ path('automocion_index') }}">AUTOMOCION</a></li>
+                <li><a href="{{ path('empresa_index') }}">EMPRESAS</a></li>
+                <li><a href="{{ path('informatica_index') }}">INFORMATICA</a></li>
+                <li><a href="{{ path('mobiliario_index') }}">MOBILIARIO</a></li>
+                <li><a href="{{ path('operativo_index') }}">OPERATIVO</a></li>
+                <li><a href="{{ path('vestuario_index') }}">VESTUARIO</a></li>
+            </ul>
+         </nav>
+{% endblock %}
+
+{% block body %}
+        {% for mensaje in app.session.flashbag.get('info') %}
+            <div class="aviso_flash">{{ mensaje }}</p></div>
+        {% endfor %}
+            <div class="limpiar"></div>            
+            
+        {% block contenido %}
+             <div class="gestion_info">
+                Seleccione la categoría del tipo de material que desea añadir, consultar o modificar.<br/>
+                Si desea eliminar algun tipo, deberá contactar con el administrador.                
+            </div>
+        {% endblock contenido %}
+{% endblock %}

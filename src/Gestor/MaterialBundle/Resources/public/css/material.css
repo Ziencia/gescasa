@@ -1,0 +1,54 @@
+#material_nav{
+    border-bottom: 1px solid #0B5F89;
+    border-top: 1px solid #0B5F89;
+    float: left;
+    margin-left: 183px;
+    margin-top: 20px;
+}
+
+#material_nav nav a:link, #material_nav nav a:visited{
+    font-weight:bold;
+    color:#000066;    
+    text-align:center;
+    padding:4px;
+}
+
+.tabla_datos_material_informatico{
+    border: 2px solid #0B5F89;
+    width:1014px;
+    border-collapse:collapse;
+    margin:5px 0px;
+    text-align:left;
+    table-layout:fixed;
+    word-wrap:break-word;
+}
+
+.tabla_datos_material_informatico td{
+    width:240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color:#000066;
+    border:0px;
+}
+
+.tabla_datos_material_informatico label{
+   color:#000066;
+   font-weight: bold;
+}
+
+.tabla_datos_material_informatico tbody.fila_par{
+    background:#DAF8FF;
+}
+
+.tabla_datos_material_informatico tbody.fila_impar{
+    background: #C3E4F5;
+}
+
+.tabla_datos_material_informatico nav{
+    display:inline-block;
+}
+
+.tabla_datos_material_informatico label.acciones{
+    vertical-align:5px;
+}

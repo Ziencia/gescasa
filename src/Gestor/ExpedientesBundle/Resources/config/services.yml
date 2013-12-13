@@ -1,0 +1,7 @@
+parameters:
+#    expedientes.example.class: Gestor\ExpedientesBundle\Example
+
+services:
+#    expedientes.example:
+#        class: %expedientes.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

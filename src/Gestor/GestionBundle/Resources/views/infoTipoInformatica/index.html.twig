@@ -1,0 +1,44 @@
+{% extends 'GestionBundle:Default:index.html.twig' %}
+
+{% block id 'informatica_index' %}
+{% block title %}Listado de tipo de material: informatica{% endblock %}
+
+{% block contenido %}
+    <h2>{{ block('title') }}</h2>
+    <div class="limpiar"></div>
+
+    <table class="tabla_datos">
+        <thead>
+            <tr>
+                <th>Descripcion</th>
+                <th>Ir a</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+                {% if loop.index is even %}
+                <tr class="fila_par">
+            {% else %}
+                <tr class="fila_impar">
+            {% endif %}               
+                <td>{{ entity.descripcion }}</td>
+                <td class="tabla_columna_centrada">
+                <ul>
+                    <li>
+                        <a href="{{ path('informatica_edit', { 'id': entity.id }) }}"><img src="{{ asset('bundles/usuario/images/Writing.png') }}" alt="Editar" title="Editar" class="imagen_pequeña"/></a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="contenedor_administrador_acciones">
+    <ul class="administrador_acciones">
+        <li>
+            <input type="button" value="Añadir nuevo tipo" class="boton" onclick="window.location='{{ path('informatica_new') }}';"/>               
+        </li>
+    </ul>
+    </div>
+
+{% endblock contenido%}

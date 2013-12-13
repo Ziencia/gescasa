@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>GESTOR DE EXPEDIENTES - {{ "now"|date("Y") }} - Acceso a la aplicación</title>
+        <link href="{{ asset('bundles/usuario/css/login.css') }}" rel="stylesheet" type="text/css" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+<body>
+
+    <div class="desarrollo">
+        Info desarrollo:<br/>
+            Usuario: A11111A -> Usuario<br/>
+            Usuario: A22222A -> Gestor<br/>
+            Usuario: A33333A -> Administrador<br/>
+            Administrador incluye todos los roles.<br/>
+            Contraseña igual a usuario.<br/>
+    </div>
+<form id="login" action="{{path('usuario_login_check')}}" method="post">
+    <h1> INICIO DE SESIÓN</h1>
+        {% if error %}
+            <div>{{ error.message|trans }}</div>
+        {% endif %}
+    <fieldset id="inputs">
+        <input type="text" id="username" placeholder="Identificación" autofocus required="true" name="_username" value="{{ last_username|default('') }}" />
+        <input type="password" id="password" placeholder="Contraseña" required="true" name="_password" />
+    </fieldset>
+    <fieldset id="actions">
+        <input type="submit" id="submit" value="Iniciar Sesión" alt="Iniciar Sesión" />
+    </fieldset>
+</form>
+</body>
+</html>

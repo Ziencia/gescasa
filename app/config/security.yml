@@ -1,0 +1,34 @@
+# proyecto/app/config/security.yml
+#app/config/security.yml
+
+security:
+
+    firewalls:
+    
+      area_segura:
+            pattern:        ^/*
+            provider:       usuarios
+            anonymous:      
+            form_login:
+                login_path: usuario_login
+                check_path: usuario_login_check
+            logout:
+                path:       usuario_logout
+                success_handler: gestor_handler.logout_success_handler
+           
+            
+    access_control:
+      - { path: /login/             , roles: IS_AUTHENTICATED_ANONYMOUSLY }       
+      - { path: ^/expedientes/*,      roles: ROLE_USER }
+      - { path: ^/gestion/*,          roles: ROLE_ADMIN }
+      - { path: ^/administracion/*,   roles: ROLE_SUPER_ADMIN }
+      
+    encoders:
+        Gestor\UsuarioBundle\Entity\Usuario: { algorithm: sha512, iterations: 10 }
+
+    providers:
+        usuarios:
+            entity: { class: Gestor\UsuarioBundle\Entity\Usuario, property: tip }
+            
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_USER]

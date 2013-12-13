@@ -1,0 +1,16 @@
+automocion_index:
+    pattern:  /
+    defaults: { _controller: "GestionBundle:infoTipoAutomocion:index" }
+
+automocion_new:
+    pattern:  /nuevo
+    defaults: { _controller: "GestionBundle:infoTipoAutomocion:new" }
+
+automocion_edit:
+    pattern:  /{id}/editar
+    defaults: { _controller: "GestionBundle:infoTipoAutomocion:edit" }
+
+automocion_update:
+    pattern:  /{id}/actualizar
+    defaults: { _controller: "GestionBundle:infoTipoAutomocion:update" }
+    requirements: { _method: post|put }

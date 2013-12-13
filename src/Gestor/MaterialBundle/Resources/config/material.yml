@@ -1,0 +1,88 @@
+material_indice:
+    pattern:  /{id}
+    defaults: { _controller: MaterialBundle:Material:index }
+
+material_informatico:
+    pattern: /{id}/informatico/
+    defaults: { _controller: MaterialBundle:Material:informatico }
+    
+material_informatico_ver:
+    pattern: /informatico/{id}
+    defaults: { _controller: MaterialBundle:Material:informaticoVer }
+    
+material_informatico_editar:
+    pattern: /informatico/{id}/editar
+    defaults: { _controller: MaterialBundle:Material:informaticoEditar }
+
+material_informatico_eliminar:
+    pattern: /informatico/{id}/borrar
+    defaults: {_controller: MaterialBundle:Material:informaticoBorrar }
+    requirements: { _method: post }
+    
+material_operativo:
+    pattern: /{id}/operativo/
+    defaults: { _controller: MaterialBundle:MaterialPolicial:policial }
+
+material_operativo_ver:
+    pattern: /operativo/{id}
+    defaults: { _controller: MaterialBundle:MaterialPolicial:policialVer }
+    
+material_operativo_editar:
+    pattern: /operativo/{id}/editar
+    defaults: { _controller: MaterialBundle:MaterialPolicial:policialEditar }
+
+material_operativo_eliminar:
+    pattern: /operativo/{id}/borrar
+    defaults: {_controller: MaterialBundle:MaterialPolicial:policialBorrar }
+    requirements: { _method: post }
+    
+material_automocion:
+    pattern: /{id}/automocion/
+    defaults: { _controller: MaterialBundle:MaterialAutomocion:automocion }
+
+material_automocion_ver:
+    pattern: /automocion/{id}
+    defaults: { _controller: MaterialBundle:MaterialAutomocion:automocionVer }
+    
+material_automocion_editar:
+    pattern: /automocion/{id}/editar
+    defaults: { _controller: MaterialBundle:MaterialAutomocion:automocionEditar }
+
+material_automocion_eliminar:
+    pattern: /automocion/{id}/borrar
+    defaults: { _controller: MaterialBundle:MaterialAutomocion:automocionBorrar }
+    requirements: { _method: post }
+    
+material_mobiliario:
+    pattern: /{id}/mobiliario/
+    defaults: { _controller: MaterialBundle:MaterialMobiliario:mobiliario }
+
+material_mobiliario_ver:
+    pattern: /mobiliario/{id}
+    defaults: { _controller: MaterialBundle:MaterialMobiliario:mobiliarioVer }
+    
+material_mobiliario_editar:
+    pattern: /mobiliario/{id}/editar
+    defaults: { _controller: MaterialBundle:MaterialMobiliario:mobiliarioEditar }
+
+material_mobiliario_eliminar:
+    pattern: /mobiliario/{id}/borrar
+    defaults: { _controller: MaterialBundle:MaterialMobiliario:mobiliarioBorrar }
+    requirements: { _method: post }
+    
+material_vestuario:
+    pattern: /{id}/vestuario/
+    defaults: { _controller: MaterialBundle:MaterialVestuario:vestuario }
+
+material_vestuario_ver:
+    pattern: /vestuario/{id}
+    defaults: { _controller: MaterialBundle:MaterialVestuario:vestuarioVer }
+    
+material_vestuario_editar:
+    pattern: /vestuario/{id}/editar
+    defaults: { _controller: MaterialBundle:MaterialVestuario:vestuarioEditar }
+
+material_vestuario_eliminar:
+    pattern: /vestuario/{id}/borrar
+    defaults: { _controller: MaterialBundle:MaterialVestuario:vestuarioBorrar }
+    requirements: { _method: post }

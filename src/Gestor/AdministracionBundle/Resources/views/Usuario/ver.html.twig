@@ -1,0 +1,89 @@
+{% extends '::administracion.html.twig' %}
+
+{% block id 'usuario_detalle' %}
+{% block title %}Datos del usuario {{ entity.nombre ~ " " ~ entity.apellidos }} {% endblock %}
+ 
+{% block contenido %}
+<h2>{{ block('title') }}</h2>
+<div class="limpiar"></div>
+
+<table class="tabla_datos_detalle">
+    <tbody>
+        <tr>
+            <th>Id:</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Nombre:</th>
+            <td>{{ entity.nombre ~ " " ~ entity.apellidos }}</td>
+        </tr>
+        <tr>
+            <th>TIP</th>
+            <td>{{ entity.tip }}</td>
+        </tr>
+        <tr>
+            <th>Pasword</th>
+            <td>{{ entity.password }}</td>
+        </tr>
+        <tr>
+            <th>Salt</th>
+            <td>{{ entity.salt }}</td>
+        </tr>
+        <tr>
+            <th>F. de alta</th>
+            <td>{{ entity.fechaAlta|date("d/m/Y") }}</td>
+        </tr>
+        <tr>
+            <th>F. de baja</th>
+            <td> {% if null!=entity.fechaBaja %}
+                    {{ entity.fechaBaja|date("d/m/Y") }}                
+                 {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>DNI</th>
+            <td>{{ entity.dni }}</td>
+        </tr>
+        <tr>
+            <th>Autorizado</th>
+            <td> {{ entity.autorizado ? '<span class="autorizado">&#10004;</span>' : '<span class="no_autorizado">&#10008;</span>' }}</td>
+        </tr>
+        <tr>
+            <th>Roles</th>
+            <td>{{ entity.roles[0] }}</td>
+        </tr>
+    </tbody>
+</table>
+
+ <div class="contenedor_administrador_acciones">
+    <ul class="administrador_acciones">
+        <li>
+           <input type="button" value="Volver al listado" class="boton" onclick="window.location='{{ path('administracion_usuario') }}';"/>                   
+        </li>
+        <li>
+           <input type="button" value="Modificar" class="boton" onclick="window.location='{{ path('administracion_usuario_editar', { 'id': entity.id }) }}';"/>  
+        </li>    
+        {% if entity.autorizado %}
+            <li>
+                <form action="{{ path('administracion_usuario_deshabilitar', { 'id': entity.id }) }}" method="post" class="formulario_oculto" onclick="return confirm('¿Esta seguro que quiere deshabilitar al usuario {{entity.nombre  ~ " " ~ entity.apellidos}} con tip {{ entity.tip }} ?');">
+                    {{ form_widget(delete_form) }}
+                    <button type="submit" class="boton">Deshabilitar usuario</button>
+                </form>
+            </li>
+        {% else %}
+            <li>
+                <form action="{{ path('administracion_usuario_habilitar', { 'id': entity.id }) }}" method="post" class="formulario_oculto" onclick="return confirm('¿Esta seguro que quiere habilitar al usuario {{entity.nombre  ~ " " ~ entity.apellidos}} con tip {{ entity.tip }} ?');">
+                    {{ form_widget(delete_form) }}
+                    <button type="submit" class="boton">Habilitar usuario</button>
+                </form>
+            </li>
+        {% endif %}
+            <li>
+                <form action="{{ path('administracion_usuario_borrar', { 'id': entity.id }) }}" method="post" class="formulario_oculto" onclick="return confirm('¿Esta seguro que quiere eliminar al usuario {{entity.nombre  ~ " " ~ entity.apellidos}} con tip {{ entity.tip }} ?');">
+                    {{ form_widget(delete_form_eliminar) }}
+                    <button type="submit" class="boton">Eliminar usuario</button>
+                </form>
+            </li>
+    </ul>
+  </div>
+{% endblock %}

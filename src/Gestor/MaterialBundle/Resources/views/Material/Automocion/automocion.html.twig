@@ -1,0 +1,98 @@
+{% extends 'MaterialBundle:Material:index.html.twig' %}
+
+{% block contenidoMaterial %}
+
+<div class="limpiar"></div>
+
+<form action="{{ path('material_automocion', { 'id': expediente_id }) }}" method="post" {{form_enctype(formulario)}} class="formulario_registro_usuario">
+    {{ form_errors(formulario) }}
+        
+        <fieldset>
+            <legend><h3>Datos del material automoción</h3></legend>
+            
+            <div>
+                {{ form_errors(formulario.descripcion) }}
+                {{ form_label(formulario.descripcion)  }}                
+                {{ form_widget(formulario.descripcion, { 'attr': { 'class': 'formulario_input_textarea' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.tipo) }}
+                {{ form_label(formulario.tipo)  }}                
+                {{ form_widget(formulario.tipo, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.marca) }}
+                {{ form_label(formulario.marca)  }}                
+                {{ form_widget(formulario.marca, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.modelo) }}
+                {{ form_label(formulario.modelo)  }}                
+                {{ form_widget(formulario.modelo, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.bastidor) }}
+                {{ form_label(formulario.bastidor)  }}                
+                {{ form_widget(formulario.bastidor, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.concesionario) }}
+                {{ form_label(formulario.concesionario)  }}                
+                {{ form_widget(formulario.concesionario, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.kit) }}
+                {{ form_label(formulario.kit)  }}                
+                {{ form_widget(formulario.kit, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.motor) }}
+                {{ form_label(formulario.motor)  }}                
+                {{ form_widget(formulario.motor, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.color) }}
+                {{ form_label(formulario.color)  }}                
+                {{ form_widget(formulario.color, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.matricula) }}
+                {{ form_label(formulario.matricula)  }}                
+                {{ form_widget(formulario.matricula, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.numserie) }}
+                {{ form_label(formulario.numserie)  }}                
+                {{ form_widget(formulario.numserie, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.destino) }}
+                {{ form_label(formulario.destino)  }}                
+                {{ form_widget(formulario.destino, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.cantidad) }}
+                {{ form_label(formulario.cantidad)  }}                
+                {{ form_widget(formulario.cantidad, { 'attr': { 'class': 'formulario_input', 'min':'0', 'max':'500' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.observaciones) }}
+                {{ form_label(formulario.observaciones)  }}                
+                {{ form_widget(formulario.observaciones, { 'attr': { 'class': 'formulario_input_textarea' } }) }}
+            </div>
+            {{ form_rest(formulario) }}
+            
+        </fieldset>
+        <div class="contenedor_administrador_acciones">
+            <ul class="administrador_acciones">
+                <li>
+                    <input class="boton" type="submit" value="Añadir" />
+                </li>
+                <li>
+                    <input type="button" value="Cancelar" class="boton" onclick="window.location='{{ path('material_indice', { 'id': expediente_id }) }}';"/>               
+                </li>
+            </ul>
+            </div>
+</form>
+
+{% endblock contenidoMaterial %}

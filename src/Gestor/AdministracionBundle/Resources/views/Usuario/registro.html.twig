@@ -1,0 +1,99 @@
+{% extends '::administracion.html.twig' %}
+{% form_theme formulario 'AdministracionBundle:Form:errores.html.twig' %}
+
+
+{% block id 'usuario_registrar' %}
+{% block title %}Añadir un nuevo usuario{% endblock %}
+
+{% block contenido %}
+    <h2>{{ block('title') }}</h2>
+    <div class="limpiar"></div>
+    
+    <form action="{{ path('administracion_usuario_crear') }}" method="post" {{ form_enctype(formulario) }} class="formulario_registro_usuario">
+        {{ form_errors(formulario) }}
+            
+        <fieldset>
+            <legend><h3>Datos personales</h3></legend>
+            
+            <div>
+                {{ form_errors(formulario.nombre) }}
+                {{ form_label(formulario.nombre, 'Nombre:') }}                
+                {{ form_widget(formulario.nombre, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            
+            <div>
+                {{ form_errors(formulario.apellidos) }}
+                {{ form_label(formulario.apellidos, 'Apellidos:') }}
+                {{ form_widget(formulario.apellidos, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            
+            <div>
+                {{ form_errors(formulario.dni) }}
+                {{ form_label(formulario.dni, 'DNI:') }}                
+                {{ form_widget(formulario.dni, { 'attr': { 'class': 'formulario_input' } }) }}
+                <p class="ayuda">Escribe las 8 cifras y la letra sin dejar ningún espacio en blanco</p>
+            </div>
+            
+        </fieldset>
+        
+        <fieldset>
+            <legend><h3>Datos de acceso</h3></legend>
+            
+            <div>
+                {{ form_errors(formulario.tip) }}
+                {{ form_label(formulario.tip, 'TIP:') }}
+                {{ form_widget(formulario.tip, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            
+            <div>
+                {{ form_errors(formulario.password) }}               
+                {{ form_widget(formulario.password, { 'attr': { 'class': 'formulario_input_password' } }) }}
+                <p class="ayuda">Deben de coincidir y mínimo de 6 carácteres.</p>
+            </div>
+            
+            <div>
+                {{ form_errors(formulario.salt) }}
+                {{ form_label(formulario.salt, 'Codificación:') }}
+                {{ form_widget(formulario.salt, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            
+            <div>
+                {{ form_errors(formulario.autorizado) }}
+                {{ form_label(formulario.autorizado, 'Habilitado:') }}
+                {{ form_widget(formulario.autorizado, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            
+            <div>
+                {{ form_errors(formulario.rol) }}
+                {{ form_label(formulario.rol, 'Rol:') }}
+                {{ form_widget(formulario.rol, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            
+            <div>
+                {{ form_errors(formulario.fechaAlta) }}
+                {{ form_label(formulario.fechaAlta, 'F. de alta:') }}
+                {{ form_widget(formulario.fechaAlta, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            
+            <div>
+                {{ form_errors(formulario.fechaBaja) }}
+                {{ form_label(formulario.fechaBaja, 'F. de baja:') }}
+                {{ form_widget(formulario.fechaBaja, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+
+        </fieldset>
+            
+        {{ form_rest(formulario) }}
+            <div class="contenedor_administrador_acciones">
+                <ul class="administrador_acciones">
+                    <li>
+                        <input class="boton" type="submit" value="Dar de alta" />
+                    </li>
+                    <li>
+                        <input type="button" value="Volver al listado" class="boton" onclick="window.location='{{ path('administracion_usuario') }}';"/>
+                    </li>
+                </ul>        
+             </div>
+    </form>
+
+{% endblock contenido %}

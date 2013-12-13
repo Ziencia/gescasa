@@ -1,0 +1,105 @@
+{% extends 'ExpedientesBundle:Expediente:expedientes.html.twig' %}
+{# {% form_theme formulario 'AdministracionBundle:Form:errores.html.twig' %} #}
+
+{% block javascript %}
+        <script src="{{ asset('bundles/expedientes/js/jquery-1.10.2.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('bundles/expedientes/js/autoNumeric.js') }}" type="text/javascript"></script>
+{% endblock %}
+        
+{% block id 'expediente_buscar_avanzado' %}
+{% block title %}Búsqueda avanzada de expedientes{% endblock %}
+
+{% block contenido %}
+    <h2>{{ block('title') }}</h2>
+    <div class="limpiar"></div>
+
+<form action="{{ path('expediente_buscar_avanzado') }}" method="post" {{ form_enctype(formulario) }} class="formulario_registro_usuario">
+   {{ form_errors(formulario) }}
+        
+        <fieldset>
+            <legend><h3>Criterios de búsqueda</h3></legend>
+            
+            <div>
+                {{ form_errors(formulario.titulo) }}
+                {{ form_label(formulario.titulo)  }}                
+                {{ form_widget(formulario.titulo, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.referencia) }}
+                {{ form_label(formulario.referencia)  }}                
+                {{ form_widget(formulario.referencia, { 'attr': { 'class': 'formulario_input' } }) }}
+                <p class="ayuda">Debe de ser en formato YYYY/DDD. Ej.: 2013/001</p>
+            </div>
+            <div>
+                {{ form_errors(formulario.estado) }}
+                {{ form_label(formulario.estado)  }}                
+                {{ form_widget(formulario.estado, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.empresa) }}
+                {{ form_label(formulario.empresa)  }}                
+                {{ form_widget(formulario.empresa, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.adjudicatario) }}
+                {{ form_label(formulario.adjudicatario)  }}                
+                {{ form_widget(formulario.adjudicatario, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div ><label id="expediente_buscar_fecha">Fecha de inicio</label></div>
+            <div>
+                {{ form_errors(formulario.fechaInicioDe) }}
+                {{ form_label(formulario.fechaInicioDe)  }}                
+                {{ form_widget(formulario.fechaInicioDe, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.fechaInicioA) }}
+                {{ form_label(formulario.fechaInicioA)  }}                
+                {{ form_widget(formulario.fechaInicioA, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div ><label id="expediente_buscar_fecha">Fecha de cierre</label></div>
+            <div>
+                {{ form_errors(formulario.fechaFinDe) }}
+                {{ form_label(formulario.fechaFinDe)  }}                
+                {{ form_widget(formulario.fechaFinDe, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.fechaFinA) }}
+                {{ form_label(formulario.fechaFinA)  }}                
+                {{ form_widget(formulario.fechaFinA, { 'attr': { 'class': 'formulario_input' } }) }}
+            </div>
+            <div ><label id="expediente_buscar_fecha">Importe</label></div>
+            <div>
+                {{ form_errors(formulario.importeDe) }}
+                {{ form_label(formulario.importeDe)  }}                
+                {{ form_widget(formulario.importeDe, { 'attr': { 'class': 'formulario_input_numero', 'data-a-sep':'.', 'data-a-dec':',', 'data-a-sign':' €', 'data-p-sign':'s' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.importeA) }}
+                {{ form_label(formulario.importeA)  }}                
+                {{ form_widget(formulario.importeA, { 'attr': { 'class': 'formulario_input_numero', 'data-a-sep':'.', 'data-a-dec':',', 'data-a-sign':' €', 'data-p-sign':'s' } }) }}
+            </div>
+            {{ form_rest(formulario) }}
+            
+        </fieldset>
+                <div class="contenedor_administrador_acciones">
+            <ul class="administrador_acciones">
+                <li>
+                    <input class="boton" type="submit" value="Buscar" title="Buscar expedientes"/>
+                </li>
+                <li>
+                    <input type="button" value="Volver al listado" class="boton" onclick="window.location='{{ path('expediente_indice') }}';"/>               
+                </li>
+            </ul>
+            </div>
+</form>  
+
+
+{%endblock contenido %}
+    
+    {% block javascripts %}
+<script type="text/javascript" language="javascript">
+jQuery(function($) {
+    $('.formulario_input_numero').autoNumeric('init');
+});    
+</script>
+{% endblock %}

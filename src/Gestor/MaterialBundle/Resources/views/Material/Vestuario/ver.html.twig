@@ -1,0 +1,76 @@
+ {% extends 'ExpedientesBundle:Expediente:expedientes.html.twig' %}
+
+{% block id 'material_vestuario_ver' %}
+{% block title %}Datos del material de vestuario:{{material.id}}, del expediente {{expediente.referencia}} {% endblock %}
+
+{% block contenido %}
+<h2>{{ block('title') }}</h2>
+<div class="limpiar"></div>
+
+<table class="tabla_datos_detalle">
+    <tbody>
+        <tr>
+            <th>Tipo:</th>
+            <td>{{ material.tipo|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Marca:</th>
+            <td>{{ material.marca|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Modelo:</th>
+            <td>{{ material.modelo|default('') }}</td>
+        </tr>
+        <tr>
+            <th>N. Serie:</th>
+            <td>{{ material.numserie|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Descripcion:</th>
+            <td>{{ material.descripcion|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Talla:</th>
+            <td>{{ material.talla|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Color:</th>
+            <td>{{ material.color|default('') }}</td>
+        </tr>        
+        <tr>
+            <th>Sexo:</th>
+            <td>{{ material.sexo|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Observaciones:</th>
+            <td>{{ material.observaciones|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Destino:</th>
+            <td>{{material.destino|default('')}}</td>
+        </tr>
+        <tr>
+            <th>Cantidad:</th>
+            <td>{{ material.cantidad|default('') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="contenedor_administrador_acciones">
+    <ul class="administrador_acciones">
+        <li>
+           <input type="button" value="Volver al material" class="boton" onclick="window.location='{{ path('material_indice', { 'id': expediente.id }) }}';"/>                   
+        </li>
+        <li>
+           <input type="button" value="Modificar" class="boton" onclick="window.location='{{ path('material_vestuario_editar', { 'id': material.id }) }}';"/>  
+        </li>    
+        <li>
+            <form action="{{ path('material_vestuario_eliminar', { 'id': material.id }) }}" method="post" class="formulario_oculto" onclick="return confirm('¿Esta seguro que quiere eliminar el material vestuario:{{material.id}}, del expediente {{ expediente.referencia }} ?');">
+                 {{ form_widget(delete_form_eliminar) }}
+            <button type="submit" class="boton">Eliminar material</button>
+            </form>
+        </li>
+    </ul>
+  </div>
+
+{% endblock contenido %}

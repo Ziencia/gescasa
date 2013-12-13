@@ -1,0 +1,16 @@
+adjudicatario_index:
+    pattern:  /
+    defaults: { _controller: "GestionBundle:infoTipoAdjudicatario:index" }
+
+adjudicatario_new:
+    pattern:  /nuevo
+    defaults: { _controller: "GestionBundle:infoTipoAdjudicatario:new" }
+
+adjudicatario_edit:
+    pattern:  /{id}/editar
+    defaults: { _controller: "GestionBundle:infoTipoAdjudicatario:edit" }
+
+adjudicatario_update:
+    pattern:  /{id}/actualizar
+    defaults: { _controller: "GestionBundle:infoTipoAdjudicatario:update" }
+    requirements: { _method: post|put }

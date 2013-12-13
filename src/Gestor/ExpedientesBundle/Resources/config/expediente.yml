@@ -1,0 +1,27 @@
+expediente_indice:
+    path:  /
+    defaults: { _controller: "ExpedientesBundle:Expediente:index" }
+
+expediente_buscar_basico:
+    path: /buscar/basico/
+    defaults: { _controller: "ExpedientesBundle:Expediente:buscarBasico" }
+
+expediente_buscar_avanzado:
+    path: /buscar/avanzado/
+    defaults: { _controller: "ExpedientesBundle:Expediente:buscarAvanzado" }
+    
+expediente_listar:
+    path: /listar/
+    defaults: { _controller: "ExpedientesBundle:Expediente:listar" }
+    
+expediente_crear:
+  path: /nuevo/
+  defaults: { _controller: "ExpedientesBundle:Expediente:nuevo" }
+  
+expediente_ver:
+  path: /ver/{id}/
+  defaults: { _controller: "ExpedientesBundle:Expediente:ver" }
+  
+expediente_filtrar_estado:
+  path: /filtrar/{estado}/ 
+  defaults: { _controller: "ExpedientesBundle:Expediente:filtrar" }

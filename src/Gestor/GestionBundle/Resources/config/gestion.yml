@@ -1,0 +1,31 @@
+gestion_indice:
+    path: /
+    defaults: { _controller: "GestionBundle:Gestion:indice" }
+    
+vestuario:
+    resource: "@GestionBundle/Resources/config/routing/infotipovestuario.yml"
+    prefix: /vestuario
+
+adjudicatario:
+    resource: "@GestionBundle/Resources/config/routing/infotipoadjudicatario.yml"
+    prefix: /adjudicatario
+    
+automocion:
+    resource: "@GestionBundle/Resources/config/routing/infotipoautomocion.yml"
+    prefix: /automocion
+    
+empresa:
+    resource: "@GestionBundle/Resources/config/routing/infotipoempresa.yml"
+    prefix: /empresa
+    
+informatica:
+    resource: "@GestionBundle/Resources/config/routing/infotipoinformatica.yml"
+    prefix: /informatica
+    
+mobiliario:
+    resource: "@GestionBundle/Resources/config/routing/infotipomobiliario.yml"
+    prefix: /mobiliario
+
+operativo:
+    resource: "@GestionBundle/Resources/config/routing/infotipooperativo.yml"
+    prefix: /operativo

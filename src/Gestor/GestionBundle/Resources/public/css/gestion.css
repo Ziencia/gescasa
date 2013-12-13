@@ -1,0 +1,29 @@
+.gestion_info{
+   font-weight: bold;
+    font-size: large;
+    margin: 15px 0px 5px 0px;
+    color: #000066;
+    text-align: center;
+}
+
+.tabla_datos{
+    border: 2px solid #0B5F89;
+    border-collapse:collapse;
+    width: auto !important;
+    margin: 0 auto !important;
+}
+
+.formulario_registro_usuario .formulario_input_textarea{
+    width: 300px;
+    margin: 5px; 
+    font-size: 1.4em;
+    color: #000066;
+    border: 1px solid #000066;
+    background: #DBF1FF;
+    height:70px;
+}
+
+.formulario_registro_usuario .formulario_input_textarea:hover{
+    border: 1px solid #000066;
+    background: #9CB8DD;
+}

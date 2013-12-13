@@ -1,0 +1,36 @@
+{% extends 'GestionBundle:Default:index.html.twig' %}
+{% form_theme formulario 'AdministracionBundle:Form:errores.html.twig' %}
+
+{% block id 'automocion_new' %}
+{% block title %}Añadir nuevo tipo de material: automocion{% endblock %}
+
+{% block contenido %}
+    <h2>{{ block('title') }}</h2>
+    <div class="limpiar"></div>
+    
+    <form action="{{ path('automocion_new') }}" method="post" {{ form_enctype(formulario) }} class="formulario_registro_usuario">
+        {{ form_errors(formulario) }}
+            
+        <fieldset>            
+            <legend><h3>Datos del tipo de material automocion</h3></legend>
+            
+            <div>
+                {{ form_errors(formulario.descripcion) }}
+                {{ form_label(formulario.descripcion)  }}                
+                {{ form_widget(formulario.descripcion, { 'attr': { 'class': 'formulario_input_textarea' } }) }}
+            </div>
+            
+        </fieldset>            
+        {{ form_rest(formulario) }}
+        <div class="contenedor_administrador_acciones">
+            <ul class="administrador_acciones">
+                <li>
+                    <input class="boton" type="submit" value="Añadir" />
+                </li>
+                <li>
+                    <input type="button" value="Cancelar" class="boton" onclick="window.location='{{ path('automocion_index') }}';"/>               
+                </li>
+            </ul>
+        </div>
+    </form>
+{% endblock %}

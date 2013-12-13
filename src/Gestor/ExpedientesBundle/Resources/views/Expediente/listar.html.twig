@@ -1,0 +1,103 @@
+{% extends 'ExpedientesBundle:Expediente:expedientes.html.twig' %}
+
+{% block javascript %}
+        <script src="{{ asset('bundles/expedientes/js/jquery-1.10.2.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('bundles/expedientes/js/jquery.dotdotdot.min.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block id 'expediente_indice' %}
+{% block title %}Listado de expedientes{% endblock %}
+
+{% block contenido %}
+<h2>{{ block('title') }}</h2>
+<div class="limpiar"></div>
+
+<section class="listado_expedientes">
+    <table class="tabla_datos" id="tabla_expedientes">
+    <thead>
+        <tr>
+            <th>Tit</th>
+            <th>Ref</th>
+            <th>Est</th>
+            <th>Emp</th>
+            <th>Adj</th>
+            <th>Ini</th>
+            <th>Fin</th>
+            <th>Imp</th>
+            <th>Ir a</th>
+        </tr>
+    </thead>
+    <tbody class="tabla_datos_listado_expedientes">
+        {% for expediente in entities %}
+            {% if loop.index is even %}
+                <tr class="fila_par">
+            {% else %}
+                <tr class="fila_impar">
+            {% endif %}
+                        <td><div id="expediente_tabla_titulo_wrap" class="wrap_tabla" title="{{ expediente.titulo }}">{{ expediente.titulo }}</div></td>          
+                        <td id="col_exp_ref">{{ expediente.referencia }}</td>
+                        
+                        <td class="tabla_columna_centrada" id="col_exp_est">
+                        {% if (expediente.estado.descripcion=='Recibido') %}
+                            <img src="{{ asset('bundles/expedientes/images/Flag_green.png') }}" alt="Expediente recibido" title="Expediente recibido" class="imagen_pequeña"/>
+                        {% elseif (expediente.estado.descripcion=='Tramitado') %}
+                            <img src="{{ asset('bundles/expedientes/images/Flag_blue.png') }}" alt="Expediente tramitado" title="Expediente tramitado" class="imagen_pequeña"/>
+                        {% else %}
+                            <img src="{{ asset('bundles/expedientes/images/Flag_red.png') }}" alt="Revisar estado" title="Revisar estado" class="imagen_pequeña"/>
+                        {% endif %}
+                        </td>
+                        
+                        <td id="col_exp_ini">{{ expediente.empresa }} </td>
+                        <td id="col_exp_ini">{{ expediente.adjudicatario }} </td>
+                        <td class="col_exp_fecha">{{ expediente.fechaInicio|date("d/m/Y") }}</td>
+                        <td class="col_exp_fecha">{% if null!=expediente.fechaFin %}
+                                {{ expediente.fechaFin|date("d/m/Y") }}
+                            {% endif %}
+                        </td>
+                        <td id="col_exp_imp">{% if null!=expediente.importe %} {{ expediente.importe|number_format(3, ',', '.') }}€ {% endif %}</td>
+                        <td id="col_exp_ira">
+                           <nav>  
+        <ul>
+                    <li>
+                        <a href="{{ path('expediente_ver', { 'id': expediente.id }) }}"><img src="{{ asset('bundles/expedientes/images/Search.png') }}" alt="Ver detalle" title="Ver detalle" class="imagen_pequeña"/></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('expediente_ver', { 'id': expediente.id }) }}"><img src="{{ asset('bundles/expedientes/images/Edit.png') }}" alt="Editar expediente" title="Editar expediente" class="imagen_pequeña"/></a>
+                    </li>
+                    <li>
+                        <a href="###"><img src="{{ asset('bundles/expedientes/images/Copy.png') }}" alt="Duplicar" title="Duplicar" class="imagen_pequeña"/></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('material_indice', { 'id': expediente.id }) }}"><img src="{{ asset('bundles/expedientes/images/AddMaterial.png') }}" alt="Editar material" title="Editar material" class="imagen_pequeña"/></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('expediente_ver', { 'id': expediente.id }) }}"><img src="{{ asset('bundles/expedientes/images/Download.png') }}" alt="Imprimir" title="Imprimir" class="imagen_pequeña"/></a>
+                    </li>
+                    <li>
+                        <a href="###"><img src="{{ asset('bundles/expedientes/images/BinFull.png') }}" alt="Eliminar" title="Eliminar" class="imagen_pequeña"/></a>
+                    </li>
+        </ul>
+    </nav>
+                        
+                        </td>
+            {% endfor %}
+    </tbody>
+    </table>
+        <div class="limpiar"></div>
+
+    
+<div class="contenedor_administrador_acciones">
+    <ul class="administrador_acciones">
+        <li>
+            <input type="button" value="Añadir un nuevo expediente" class="boton" onclick="window.location='{{ path('expediente_crear') }}';"/>               
+        </li>
+        <li>
+            <input type="button" value="Mostrar solo autorizados" class="boton" onclick="window.location='{{ path('administracion_usuario_listar_autorizados') }}';"/>               
+        </li>
+    </ul>
+ </div>
+</section>
+
+
+
+{%endblock contenido %}

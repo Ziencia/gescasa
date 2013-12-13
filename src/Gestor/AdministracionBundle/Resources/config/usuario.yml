@@ -1,0 +1,42 @@
+# src/gestor/AdministracionBundle/Resources/Config/usuario.yml
+
+administracion_usuario:
+    pattern:  /
+    defaults: { _controller: "AdministracionBundle:Usuario:index" }
+
+administracion_usuario_crear:
+  pattern: /registro/
+  defaults: { _controller: "AdministracionBundle:Usuario:registro" }
+  
+administracion_usuario_ver:
+  pattern: /ver/{id}/
+  defaults: {_controller: "AdministracionBundle:Usuario:ver"}
+ 
+administracion_usuario_editar:
+  pattern: /editar/{id}/
+  defaults: {_controller: "AdministracionBundle:Usuario:editar"}
+
+administracion_usuario_actualizar:
+    pattern:  /actualizar/{id}
+    defaults: { _controller: "AdministracionBundle:Usuario:actualizar" }
+    requirements: { _method: post }
+    
+administracion_usuario_borrar:
+  pattern: /borrar/{id}/
+  defaults: {_controller: "AdministracionBundle:Usuario:borrar"}
+  requirements: { _method: post }
+  
+administracion_usuario_deshabilitar:
+  pattern: /deshabilitar/{id}/
+  defaults: {_controller: "AdministracionBundle:Usuario:deshabilitar"}
+  requirements: { _method: post }
+  
+administracion_usuario_habilitar:
+  pattern: /habilitar/{id}/
+  defaults: {_controller: "AdministracionBundle:Usuario:habilitar"}
+  requirements: { _method: post }
+  
+administracion_usuario_listar_autorizados:
+  path: /autorizados
+  defaults: {_controller: "AdministracionBundle:Usuario:listarAutorizados"}
+  

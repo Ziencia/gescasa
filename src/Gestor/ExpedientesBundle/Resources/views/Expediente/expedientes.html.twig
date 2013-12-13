@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+<link href="{{ asset('bundles/expedientes/css/expedientes.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block header %}
+        <nav>
+            <ul>
+                <li><a href="{{ path('expediente_indice') }}">INICIO</a>
+                <li><a href="{{ path('expediente_crear') }}">NUEVO</a></li>
+                <li><a href="{{ path('expediente_buscar_avanzado') }}">BÚSQUEDA AVANZADA</a></li>
+                <li><a href="{{ path('expediente_listar') }}">MOSTRAR TODOS</a></li>
+            </ul>
+         </nav>
+{% endblock %}
+
+{% block body %}
+        {% for mensaje in app.session.flashbag.get('info') %}
+            <div class="aviso_flash">{{ mensaje }}</p></div>
+        {% endfor %}
+            <div class="limpiar"></div>
+        {% block contenido %}{% endblock contenido %}
+{% endblock %}
