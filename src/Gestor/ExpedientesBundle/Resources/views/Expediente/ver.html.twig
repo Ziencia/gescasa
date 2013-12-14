@@ -1,0 +1,73 @@
+{% extends 'ExpedientesBundle:Expediente:expedientes.html.twig' %}
+
+{% block id 'expediente_ver' %}
+{% block title %}Datos del expediente con referencia: {{expediente.referencia}} {% endblock %}
+
+{% block contenido %}
+<h2>{{ block('title') }}</h2>
+<div class="limpiar"></div>
+
+<table class="tabla_datos_detalle">
+    <tbody>
+        <tr>
+            <th>Titulo:</th>
+            <td>{{ expediente.titulo|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Referencia:</th>
+            <td>{{ expediente.referencia|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Estado:</th>
+            <td>{{ expediente.estado|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Empresa:</th>
+            <td>{{ expediente.empresa|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Adjudicatario:</th>
+            <td>{{ expediente.adjudicatario|default('') }}</td>
+        </tr>
+        <tr>
+            <th>F. de inicio:</th>
+            <td>{{ expediente.fechaInicio|date("d/m/Y")|default('') }}</td>
+        </tr>
+        <tr>
+            <th>F. Fin:</th>
+            <td>{{ expediente.fechaFin|date("d/m/Y")|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Importe:</th>
+            <td>{{ expediente.importe|number_format(3, ',', '.')|default('') }} €</td>
+        </tr>
+        <tr>
+            <th>Descripción (0):</th>
+            <td>{{ expediente.descripcion0|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Descripción (1):</th>
+            <td>{{ expediente.descripcion1|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Descripción (2):</th>
+            <td>{{ expediente.descripcion2|default('') }}</td>
+        </tr>        
+    </tbody>
+</table>
+
+<div class="contenedor_administrador_acciones">
+    <ul class="administrador_acciones">
+        <li>
+           <input type="button" value="Volver a expedientes" class="boton" onclick="window.location='{{ path('expediente_indice') }}';"/>                   
+        </li>
+        <li>
+           <input type="button" value="Modificar" class="boton" onclick="window.location='{{ path('material_automocion_editar', { 'id': expediente.id }) }}';"/>  
+        </li>    
+        <li>
+
+        </li>
+    </ul>
+  </div>
+
+{% endblock contenido %}

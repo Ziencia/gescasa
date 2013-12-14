@@ -27,7 +27,8 @@ class ExpedienteController extends Controller {
         return $this->render('ExpedientesBundle:Expediente:index.html.twig', array(
             'entities'  => $entities,
             'paginador' => $paginador,
-            'expedientes_info' => $exp_info
+            'expedientes_info' => $exp_info,
+            'ruta_paginador'   => 'expediente_indice'
         ));       
       
     }
@@ -71,12 +72,27 @@ class ExpedienteController extends Controller {
     
     public function verAction($id){
         
+        $em = $this->getDoctrine()->getManager();
+        
+        $expediente = $em->getRepository('ExpedientesBundle:Expediente')->find($id);
+        
+        if (!$expediente) {
+            throw $this->createNotFoundException('No existe este expediente');
+        }
+
+        $descripcion = 'INFO: Consulta expediente con referencia: ' . $expediente->getReferencia() ;
+        $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+        $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+           
+        return $this->render('ExpedientesBundle:Expediente:ver.html.twig', array(
+                    'expediente' => $expediente
+        ));
     }
 
     public function filtrarAction($estado){
         
         $em = $this->getDoctrine()->getManager();
-        
+
         $paginador = $this->get('ideup.simple_paginator');
         $paginador->setItemsPerPage(9);
 
@@ -91,16 +107,24 @@ class ExpedienteController extends Controller {
         return $this->render('ExpedientesBundle:Expediente:index.html.twig', array(
             'entities'  => $entities,
             'paginador' => $paginador,
-            'expedientes_info' => $exp_info
+            'expedientes_info' => $exp_info,
+            'ruta_paginador'   => 'expediente_filtrar_estado',
+            'estado'           => $estado
         )); 
     }
     
     public function buscarBasicoAction(Request $request){
         
-        $cadenaTitulo= $request->request->get('exp_tit');
+        $cadenaTitulo = $request->request->get('exp_tit'); //post
+        $cadenaTitulo2 =  $request->query->get('titulo');  //get
+        
+        if (empty($cadenaTitulo) && !empty($cadenaTitulo2))
+            $cadenaTitulo=$cadenaTitulo2;
+            
         $paginador = $this->get('ideup.simple_paginator');
         $paginador->setItemsPerPage(9);
-                    $em = $this->getDoctrine()->getManager();
+       
+        $em = $this->getDoctrine()->getManager();
         $exp_info='';
         
         if (!empty($cadenaTitulo)){
@@ -111,21 +135,23 @@ class ExpedienteController extends Controller {
                 $exp_info='<div class="expedientes_info">Se han encontrado '.$paginador->getTotalItems().' expedientes que cumplen los criterios de búsqueda</div>';
             else
                 $exp_info='<div class="expedientes_info">No se han encontrado expedientes que cumplan los criterios de búsqueda</div>';
-        
+                    
             return $this->render('ExpedientesBundle:Expediente:index.html.twig', array(
                 'entities'  => $entities,
                 'paginador' => $paginador,
-                'expedientes_info' => $exp_info
+                'expedientes_info' => $exp_info,
+                'ruta_paginador'   => 'expediente_buscar_basico',
+                'exp_titulo' => $cadenaTitulo
             )); 
-        }else{
-
+        }else{                
             $entities  = $paginador->paginate(        
                 $em->getRepository('ExpedientesBundle:Expediente')->queryTodosExpedientesDesc())->getResult();
                
             return $this->render('ExpedientesBundle:Expediente:index.html.twig', array(
             'entities'  => $entities,
             'paginador' => $paginador,
-            'expedientes_info' => $exp_info
+            'expedientes_info' => $exp_info,
+            'ruta_paginador'   => 'expediente_indice'
         ));       
             
         }
@@ -220,34 +246,20 @@ class ExpedienteController extends Controller {
         if ($formulario->isValid()) {
         
             $data = $formulario->getData();
-            /*
-            $texto='Texto de prueba </br> Valores: </br>';
-            foreach($data as $item => $value){
-                if ($value instanceof \DateTime)
-                    $texto.= $item. ": ".$value->format('Y-m-d').'</br>';
-                else
-                    $texto.= $item. ": ".$value.'</br>';
-            }                                      
-      
-            $f= $data['fechaInicioDe']->format('Y-m-d');
             
-            $texto .= " AND e.fechaInicio BETWEEN '$f'";
-            $response='<h1>'.$texto.'</h1>';*/
-            
-            $entities  = $paginador->paginate(        
-                $em->getRepository('ExpedientesBundle:Expediente')->queryFiltrarExpedientesAvanzado($data))->getResult();
+            $entities  = $em->getRepository('ExpedientesBundle:Expediente')->queryFiltrarExpedientesAvanzado($data)->getResult();
              
-           if ($paginador->getTotalItems()>0)
-                $exp_info='<div class="expedientes_info">Se han encontrado '.$paginador->getTotalItems().' expedientes que cumplen los criterios de búsqueda</div>';
+           if (count($entities)>0)
+                $exp_info='<div class="expedientes_info">Se han encontrado '.count($entities).' expedientes que cumplen los criterios de búsqueda</div>';
             else
                 $exp_info='<div class="expedientes_info">No se han encontrado expedientes que cumplan los criterios de búsqueda</div>';   
             
             return $this->render('ExpedientesBundle:Expediente:index.html.twig', array(
                 'entities'  => $entities,
                 'paginador' => $paginador,
-                'expedientes_info' => $exp_info
+                'expedientes_info' => $exp_info,
+                'ruta_paginador' => 'expediente_no_paginador'
             ));
-            //return new Response($response);
         }
     
         return $this->render('ExpedientesBundle:Expediente:buscar.html.twig',

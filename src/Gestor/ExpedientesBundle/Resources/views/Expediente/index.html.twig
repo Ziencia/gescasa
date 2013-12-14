@@ -17,7 +17,7 @@
 </div>
 <div id="expediente_filtro">
         <form method="post" action="{{ path('expediente_buscar_basico') }}" id="buscar">
-        <input name="exp_tit" type="search" size="40" placeholder="Buscar por título..." title="Buscar expediente por título" />
+        <input name="exp_tit" type="search" size="40" placeholder="Buscar por título..." title="Buscar expediente por título" value='{{exp_titulo|default('')}}' />
     </form>
     <p id="expediente_filtrar">Mostrar:</p>
     <a href="{{ path('expediente_filtrar_estado', { 'estado': 'Otro' }) }}"><img src="{{ asset('bundles/expedientes/images/Flag_red.png') }}" alt="Expedientes a revisar" title="Expedientes a revisar"/></a>
@@ -83,19 +83,23 @@
  </article>
  {% endfor %}
     <div class="limpiar"></div>
-    {% include 'AdministracionBundle:Default:paginador.html.twig'  with { 'ruta': 'expediente_indice' } only %}
-     <div class="contenedor_administrador_acciones">
+    
+    {% if ruta_paginador=='expediente_indice' %}
+        {% include 'AdministracionBundle:Default:paginador.html.twig'  with { 'ruta': 'expediente_indice' } %}
+    {% elseif ruta_paginador=='expediente_filtrar_estado' %}
+        {% include 'AdministracionBundle:Default:paginador_estado.html.twig'  with { 'ruta': 'expediente_filtrar_estado' } %}
+    {% elseif ruta_paginador=='expediente_buscar_basico' %}
+        {% include 'AdministracionBundle:Default:paginador_buscar_basico.html.twig'  with { 'ruta': 'expediente_buscar_basico' } %}
+    {% endif %}
+    
+    <div class="contenedor_administrador_acciones">
     <ul class="administrador_acciones">
         <li>
             <input type="button" value="Añadir un nuevo expediente" class="boton" onclick="window.location='{{ path('expediente_crear') }}';"/>               
         </li>
-        <li>
-            <input type="button" value="Mostrar solo autorizados" class="boton" onclick="window.location='{{ path('administracion_usuario_listar_autorizados') }}';"/>               
-        </li>
     </ul>
  </div>
 </section>
-
 
 
 {%endblock contenido %}
