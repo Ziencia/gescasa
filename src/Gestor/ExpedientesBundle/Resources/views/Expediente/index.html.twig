@@ -63,16 +63,16 @@
                         <a href="{{ path('expediente_ver', { 'id': expediente.id }) }}"><img src="{{ asset('bundles/expedientes/images/Search.png') }}" alt="Ver detalle" title="Ver detalle" class="imagen_mediana"/></a>
                     </li>
                     <li>
-                        <a href="{{ path('expediente_ver', { 'id': expediente.id }) }}"><img src="{{ asset('bundles/expedientes/images/Edit.png') }}" alt="Editar expediente" title="Editar expediente" class="imagen_mediana"/></a>
+                        <a href="{{ path('expediente_editar', { 'id': expediente.id }) }}"><img src="{{ asset('bundles/expedientes/images/Edit.png') }}" alt="Editar expediente" title="Editar expediente" class="imagen_mediana"/></a>
                     </li>
                     <li>
-                        <a href="###"><img src="{{ asset('bundles/expedientes/images/Copy.png') }}" alt="Duplicar" title="Duplicar" class="imagen_mediana"/></a>
+                        <a href="{{ path('expediente_duplicar', { 'id': expediente.id }) }}"><img src="{{ asset('bundles/expedientes/images/Copy.png') }}" alt="Duplicar" title="Duplicar" class="imagen_mediana"/></a>
                     </li>
                     <li>
                         <a href="{{ path('material_indice', { 'id': expediente.id }) }}"><img src="{{ asset('bundles/expedientes/images/AddMaterial.png') }}" alt="Editar material" title="Editar material" class="imagen_mediana"/></a>
                     </li>
                     <li>
-                        <a href="{{ path('expediente_ver', { 'id': expediente.id }) }}"><img src="{{ asset('bundles/expedientes/images/Download.png') }}" alt="Imprimir" title="Imprimir" class="imagen_mediana"/></a>
+                        <a href="{{ path('expediente_pdf', { 'id': expediente.id }) }}"><img src="{{ asset('bundles/expedientes/images/Download.png') }}" alt="Imprimir" title="Imprimir" class="imagen_mediana"/></a>
                     </li>
                     <li>
                         <a href="###"><img src="{{ asset('bundles/expedientes/images/BinFull.png') }}" alt="Eliminar" title="Eliminar" class="imagen_mediana"/></a>

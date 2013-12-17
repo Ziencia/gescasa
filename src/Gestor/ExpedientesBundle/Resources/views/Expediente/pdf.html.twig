@@ -1,0 +1,86 @@
+<table class="tabla_datos_detalle">
+    <tbody>
+        <tr>
+            <th>Titulo:</th>
+            <td>{{ expediente.titulo|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Referencia:</th>
+            <td>{{ expediente.referencia|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Estado:</th>
+            <td>{{ expediente.estado|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Empresa:</th>
+            <td>{{ expediente.empresa|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Adjudicatario:</th>
+            <td>{{ expediente.adjudicatario|default('') }}</td>
+        </tr>
+        <tr>
+            <th>F. de inicio:</th>
+            <td>{{ expediente.fechaInicio|date("d/m/Y")|default('') }}</td>
+        </tr>
+        <tr>
+            <th>F. Fin:</th>
+            <td>{{ expediente.fechaFin|date("d/m/Y")|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Importe:</th>
+            <td>{{ expediente.importe|number_format(3, ',', '.')|default('') }} €</td>
+        </tr>
+        <tr>
+            <th>Descripción (0):</th>
+            <td>{{ expediente.descripcion0|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Descripción (1):</th>
+            <td>{{ expediente.descripcion1|default('') }}</td>
+        </tr>
+        <tr>
+            <th>Descripción (2):</th>
+            <td>{{ expediente.descripcion2|default('') }}</td>
+        </tr>        
+    </tbody>
+</table>
+
+ {% if informatica %}
+            <section class="listado_materiales">
+                <div class="expedientes_info">Material informático del expediente</div>
+                {% for material in informatica %}
+                    <table class="tabla_datos_material_informatico">
+                         {% if loop.index is even %}
+                                <tbody class="fila_par">
+                         {% else %}
+                                <tbody class="fila_impar">
+                         {% endif %}
+                                <tr>
+                                    <td title="{{ material.tipo }}"><label>Tipo:</label> {{ material.tipo }}</td>
+                                    <td title="{{ material.marca}}"><label>Marca:</label> {{material.marca }}</td>
+                                    <td title="{{ material.modelo}}"><label>Modelo:</label> {{ material.modelo }}</td>
+                                    <td title="{{ material.numserie|default('')}}"><label>N. Serie:</label> {{ material.numserie|default('') }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" title="{{ material.descripcion|default('')}}"><label>Descripción:</label> {{material.descripcion|default('')}}</td>
+                                </tr>       
+                                <tr>
+                                    <td colspan="4" title="{{ material.caracteristicas|default('')}}"><label>Caracteristicas:</label> {{material.caracteristicas|default('')}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" title="{{ material.observaciones|default('')}}"><label>Observaciones:</label> {{material.observaciones|default('')}}</td>
+                                </tr>
+                                <tr>
+                                    <td title="{{ material.destino|default('')}}"><label>Destino:</label> {{material.destino|default('')}}</td>
+                                    <td title="{{ material.cantidad|default('')}}"><label>Cantidad:</label> {{material.cantidad|default('')}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                        </tbody>
+                    </table>
+               {% endfor %}
+
+            </section>
+        {% endif %}

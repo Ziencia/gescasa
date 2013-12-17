@@ -62,7 +62,10 @@
            <input type="button" value="Volver a expedientes" class="boton" onclick="window.location='{{ path('expediente_indice') }}';"/>                   
         </li>
         <li>
-           <input type="button" value="Modificar" class="boton" onclick="window.location='{{ path('material_automocion_editar', { 'id': expediente.id }) }}';"/>  
+           <input type="button" value="Ver material" class="boton" onclick="window.location='{{ path('material_indice', { 'id': expediente.id }) }}';"/>                   
+        </li>
+        <li>
+           <input type="button" value="Modificar" class="boton" onclick="window.location='{{ path('expediente_editar', { 'id': expediente.id }) }}';"/>  
         </li>    
         <li>
 

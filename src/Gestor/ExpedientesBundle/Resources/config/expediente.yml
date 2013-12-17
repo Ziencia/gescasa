@@ -25,3 +25,15 @@ expediente_ver:
 expediente_filtrar_estado:
   path: /filtrar/{estado}/ 
   defaults: { _controller: "ExpedientesBundle:Expediente:filtrar" }
+  
+expediente_editar:
+  path: /editar/{id}/
+  defaults: { _controller: "ExpedientesBundle:Expediente:editar" }
+
+expediente_duplicar:
+  path: /duplicar/{id}/
+  defaults: { _controller: "ExpedientesBundle:Expediente:duplicar" }
+  
+expediente_pdf:
+  path: /pdf/{id}/
+  defaults: { _controller: "ExpedientesBundle:Expediente:pdf" }

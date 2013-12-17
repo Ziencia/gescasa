@@ -6,14 +6,14 @@
 	<script src="{{ asset('bundles/expedientes/js/autoNumeric.js') }}" type="text/javascript"></script>
 {% endblock %}
         
-{% block id 'expediente_nuevo' %}
-{% block title %}Añadir un nuevo expediente{% endblock %}
+{% block id 'expediente_modificar' %}
+{% block title %}Modificar el expediente {{expediente.referencia}}{% endblock %}
 
 {% block contenido %}
     <h2>{{ block('title') }}</h2>
     <div class="limpiar"></div>
 
-<form action="{{ path('expediente_crear') }}" method="post" {{form_enctype(formulario)}} class="formulario_registro_usuario">
+<form action="{{ path('expediente_editar', { 'id': expediente.id }) }}" method="post" {{form_enctype(formulario)}} class="formulario_registro_usuario">
     {{ form_errors(formulario) }}
         
         <fieldset>
@@ -81,7 +81,7 @@
         <div class="contenedor_administrador_acciones">
             <ul class="administrador_acciones">
                 <li>
-                    <input class="boton" type="submit" value="Dar de alta" />
+                    <input class="boton" type="submit" value="Guardar cambios" />
                 </li>
                 <li>
                     <input type="button" value="Volver al listado" class="boton" onclick="window.location='{{ path('expediente_indice') }}';"/>               

@@ -9,6 +9,7 @@ use Gestor\ExpedientesBundle\Entity\Expediente;
 use Gestor\MensajeBundle\Entity\Mensaje;
 use \Gestor\ExpedientesBundle\Form\ExpedienteType;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpFoundation\Response;
 
 class ExpedienteController extends Controller {
 
@@ -57,6 +58,13 @@ class ExpedienteController extends Controller {
          // $this->get('session')->getFlashBag()->add('info', 'Usuario dado de alta con fecha ' . $expediente->getTitulo() . ' ' . $expediente->getEstado() );
             //$entity->getFechaAlta()->format('d-m-yy')
           
+            $importe = $formulario->get('importe')->getData();
+            $importe = substr($importe, 0, strpos($importe, ' '));
+            $importe = str_replace('.', '', $importe);
+            $importe = str_replace(',', '.', $importe);
+            
+            $entity->setImporte($importe);
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -68,6 +76,103 @@ class ExpedienteController extends Controller {
         return $this->render('ExpedientesBundle:Expediente:nuevo.html.twig',
                 array('formulario' => $formulario->createView())
     );
+    }
+    
+    public function editarAction($id){
+        $em = $this->getDoctrine()->getManager();
+
+        $expediente = $em->getRepository('ExpedientesBundle:Expediente')->find($id);
+
+        if (!$expediente) {
+            throw $this->createNotFoundException('No se ha encontrado el expediente solicitado');
+        }
+
+        $formulario   = $this->createForm(new ExpedienteType(), $expediente);
+
+        $request = $this->getRequest();
+
+        $formulario->handleRequest($request);
+
+        if ($formulario->isValid()) {
+            
+            $importe = $formulario->get('importe')->getData();
+            $importe = substr($importe, 0, strpos($importe, ' '));
+            $importe = str_replace('.', '', $importe);
+            $importe = str_replace(',', '.', $importe);
+            
+            $expediente->setImporte($importe);
+            
+            $em->persist($expediente);
+
+            $flash = 'El expediente ha sido actualizado';
+            $this->get('session')->getFlashBag()->add('info', $flash);
+            
+            $descripcion = 'INFO: Modicación expediente. ID: ' .$expediente->getId() . ' Expediente ' . $expediente->getReferencia() ;
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+        
+            $em->flush();
+                        
+            return $this->redirect($this->generateUrl('expediente_indice', array(
+                'id' => $expediente->getId()
+            )));
+        }
+
+        return $this->render('ExpedientesBundle:Expediente:modificar.html.twig', array(
+            'expediente'    => $expediente,
+            'formulario'   => $formulario->createView()
+        )); 
+    }
+    
+    public function duplicarAction($id){
+        $em = $this->getDoctrine()->getManager();
+
+        $expediente = $em->getRepository('ExpedientesBundle:Expediente')->find($id);
+
+        if (!$expediente) {
+            throw $this->createNotFoundException('No se ha encontrado el expediente solicitado');
+        }
+
+        $expediente2 = new Expediente();
+        $expediente2 = $expediente;
+        
+        $expediente2->setReferencia('');
+        $expediente2->setFechaInicio(new \DateTime('today'));
+
+        $formulario   = $this->createForm(new ExpedienteType(), $expediente2);
+
+        $request = $this->getRequest();
+
+        $formulario->handleRequest($request);
+
+        if ($formulario->isValid()) {
+            
+            $importe = $formulario->get('importe')->getData();
+            $importe = substr($importe, 0, strpos($importe, ' '));
+            $importe = str_replace('.', '', $importe);
+            $importe = str_replace(',', '.', $importe);
+            
+            $expediente2->setImporte($importe);
+            
+            $em->persist($expediente2);
+
+            $flash = 'El expediente ha sido creado';
+            $this->get('session')->getFlashBag()->add('info', $flash);
+            
+            $descripcion = 'INFO: Creación de expediente. ID: ' .$expediente->getId() . ' Expediente ' . $expediente->getReferencia() ;
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+        
+            $em->flush();
+                        
+            return $this->redirect($this->generateUrl('expediente_indice', array(
+                'id' => $expediente->getId()
+            )));
+        }
+
+        return $this->render('ExpedientesBundle:Expediente:nuevo.html.twig', array(
+            'formulario'   => $formulario->createView()
+        )); 
     }
     
     public function verAction($id){
@@ -265,5 +370,25 @@ class ExpedienteController extends Controller {
         return $this->render('ExpedientesBundle:Expediente:buscar.html.twig',
                 array('formulario'=>$formulario->createView())
         );
+    }
+    
+    public function pdfAction($id){
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $expediente = $em->getRepository('ExpedientesBundle:Expediente')->find($id);
+        
+        if (!$expediente) {
+            throw $this->createNotFoundException('No existe este expediente');
+        }
+        
+        $informatica = $em->getRepository('MaterialBundle:MaterialInformatico')->findBy(array(
+            'fkExpediente' => $expediente
+        ));
+        
+        return $this->render('ExpedientesBundle:Expediente:pdf.html.twig', array(
+            'expediente'   => $expediente,
+            'informatica'  => $informatica
+        )); 
     }
 }

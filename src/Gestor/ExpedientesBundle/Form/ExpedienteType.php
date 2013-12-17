@@ -55,7 +55,7 @@ class ExpedienteType extends AbstractType
                     'required'=>false,
                     'label'=>'F. de cierre:'
                     ))
-                ->add('importe','money', array(
+                ->add('importe','text', array(
                     'required'=>false,
                     'label'=>'Importe:'
                     ))            
