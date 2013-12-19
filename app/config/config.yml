@@ -64,3 +64,13 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+    
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     C:\wwwgescasa\wkhtmltopdf\wkhtmltopdf.exe
+        options:    []
+    image:
+        enabled:    false
+        binary:     /usr/local/bin/wkhtmltoimage
+        options:    []

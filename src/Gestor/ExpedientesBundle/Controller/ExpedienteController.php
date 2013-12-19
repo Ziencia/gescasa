@@ -386,9 +386,27 @@ class ExpedienteController extends Controller {
             'fkExpediente' => $expediente
         ));
         
+        /*
         return $this->render('ExpedientesBundle:Expediente:pdf.html.twig', array(
             'expediente'   => $expediente,
             'informatica'  => $informatica
-        )); 
+        ));
+                
+        */
+        $html = $this->renderView('ExpedientesBundle:Expediente:pdf.html.twig', array(
+            'expediente'   => $expediente,
+            'informatica'  => $informatica
+        ));
+
+        $nombrePDF = 'Expediente_'.$expediente->getReferencia().'.pdf';
+        
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+                200,
+                array(
+                    'Content-Type'          => 'application/pdf',
+                    'Content-Disposition'   => 'attachment; filename=' . $nombrePDF . ""
+            )
+        );
     }
 }

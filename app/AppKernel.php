@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Gestor\MensajeBundle\MensajeBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Gestor\MaterialBundle\MaterialBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

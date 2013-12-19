@@ -1,51 +1,39 @@
-<table class="tabla_datos_detalle">
-    <tbody>
-        <tr>
-            <th>Titulo:</th>
-            <td>{{ expediente.titulo|default('') }}</td>
-        </tr>
-        <tr>
-            <th>Referencia:</th>
-            <td>{{ expediente.referencia|default('') }}</td>
-        </tr>
-        <tr>
-            <th>Estado:</th>
-            <td>{{ expediente.estado|default('') }}</td>
-        </tr>
-        <tr>
-            <th>Empresa:</th>
-            <td>{{ expediente.empresa|default('') }}</td>
-        </tr>
-        <tr>
-            <th>Adjudicatario:</th>
-            <td>{{ expediente.adjudicatario|default('') }}</td>
-        </tr>
-        <tr>
-            <th>F. de inicio:</th>
-            <td>{{ expediente.fechaInicio|date("d/m/Y")|default('') }}</td>
-        </tr>
-        <tr>
-            <th>F. Fin:</th>
-            <td>{{ expediente.fechaFin|date("d/m/Y")|default('') }}</td>
-        </tr>
-        <tr>
-            <th>Importe:</th>
-            <td>{{ expediente.importe|number_format(3, ',', '.')|default('') }} €</td>
-        </tr>
-        <tr>
-            <th>Descripción (0):</th>
-            <td>{{ expediente.descripcion0|default('') }}</td>
-        </tr>
-        <tr>
-            <th>Descripción (1):</th>
-            <td>{{ expediente.descripcion1|default('') }}</td>
-        </tr>
-        <tr>
-            <th>Descripción (2):</th>
-            <td>{{ expediente.descripcion2|default('') }}</td>
-        </tr>        
-    </tbody>
-</table>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/expedientes/css/impresion.css') }}" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        
+        <div id="centrado">
+        <label id="encabezado"> 
+            GESTOR DE EXPEDIENTES: GESCASA
+             - {{ "now"|date("Y") }} -
+        </label>
+        
+        <br/><br/><br/>
+        
+        <label id="titulo">{{ expediente.titulo|default('') }}</label> <br/>
+        <label id="referencia">({{ expediente.referencia|default('') }})</label> <br/>
+            </div>
+        <br/><br/><br/>
+        
+        <label>ESTADO:</label><label> {{ expediente.estado|default('') }}</label><br/>
+        <label>EMPRESA:</label><label> {{ expediente.empresa|default('') }}</label><br/>
+        <label>ADJUDICATARIO:</label><label> {{ expediente.adjudicatario|default('') }}</label><br/>
+        <label>F. DE INICIO:</label><label> {{ expediente.fechaInicio|date("d/m/Y")|default('') }}</label><br/>
+        <label>F. DE CIERRE:</label><label> {{ expediente.fechaFin|date("d/m/Y")|default('') }}</label><br/>
+        <label>IMPORTE: {{ expediente.importe|number_format(3, ',', '.')|default('') }} €</label><br/>
+        
+        <br/><br/><br/>
+        
+        <label class="centrado">DESCRIPCIÓN:</label>
+        <label>{{ expediente.descripcion0|default('') }}</label><br/>
+        <label>{{ expediente.descripcion1|default('') }}</label><br/>
+        <label>{{ expediente.descripcion2|default('') }}</label><br/>
+
+        <br/><br/><br/>
 
  {% if informatica %}
             <section class="listado_materiales">
@@ -84,3 +72,5 @@
 
             </section>
         {% endif %}
+        </body>
+    </html>
