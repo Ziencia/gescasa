@@ -386,16 +386,35 @@ class ExpedienteController extends Controller {
             'fkExpediente' => $expediente
         ));
         
+        $operativo = $em->getRepository('MaterialBundle:MaterialPolicial')->findBy(array(
+            'fkExpediente' => $expediente
+        ));           
+       
+        $mobiliario = $em->getRepository('MaterialBundle:MaterialMobiliario')->findBy(array(
+            'fkExpediente' => $expediente
+        ));
+      
+        $automocion = $em->getRepository('MaterialBundle:MaterialAutomocion')->findBy(array(
+            'fkExpediente' => $expediente
+        ));
+  
+        $vestuario = $em->getRepository('MaterialBundle:MaterialVestuario')->findBy(array(
+            'fkExpediente' => $expediente
+        ));
         /*
         return $this->render('ExpedientesBundle:Expediente:pdf.html.twig', array(
             'expediente'   => $expediente,
             'informatica'  => $informatica
-        ));
+        ));*/
                 
-        */
+        
         $html = $this->renderView('ExpedientesBundle:Expediente:pdf.html.twig', array(
             'expediente'   => $expediente,
-            'informatica'  => $informatica
+            'informatica'  => $informatica,
+            'operativo'    => $operativo,
+            'mobiliario'   => $mobiliario,
+            'automocion'   => $automocion,
+            'vestuario'    => $vestuario
         ));
         
         $nombrePDF = 'Expediente_'.$expediente->getReferencia().'.pdf';
@@ -406,6 +425,7 @@ class ExpedienteController extends Controller {
                     array(
                         'lowquality' => false,
                         'page-size'  => 'A4',
+                        'header-right' => $nombreFooter,
                         'footer-left' => '[date] - [time]',
                         'footer-center' => $nombreFooter,
                         'footer-right'  => 'Pag.: [page] de [topage]'

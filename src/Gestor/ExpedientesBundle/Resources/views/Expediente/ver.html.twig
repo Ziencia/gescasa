@@ -35,7 +35,7 @@
         </tr>
         <tr>
             <th>F. Fin:</th>
-            <td>{{ expediente.fechaFin|date("d/m/Y")|default('') }}</td>
+            <td>{% if (expediente.fechaFin) %} {{ expediente.fechaFin|date("d/m/Y") }} {% endif %}</td>
         </tr>
         <tr>
             <th>Importe:</th>

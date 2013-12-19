@@ -47,4 +47,24 @@
     margin-left:50px;
 }
 
+.expedientes_info{
+    margin-left:50px;
+    border-bottom: 2px solid #000066;;
+    display:inline;    
+}
+
+.tabla_datos_material{
+    border-bottom:2px dashed #000066;
+    margin:10px 0px 30px 70px;
+    width:800px;   
+    page-break-inside: avoid;
+}
+
+.tabla_datos_material label{
+    font-weight:bold;
+    width:150px;
+    float:left;
+    text-align:right;
+    margin-right: 20px;
+}
 
