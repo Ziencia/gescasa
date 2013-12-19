@@ -397,11 +397,20 @@ class ExpedienteController extends Controller {
             'expediente'   => $expediente,
             'informatica'  => $informatica
         ));
-
+        
         $nombrePDF = 'Expediente_'.$expediente->getReferencia().'.pdf';
+        $nombreFooter = 'Expediente - '. $expediente->getReferencia();
         
         return new Response(
-            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html,
+                    array(
+                        'lowquality' => false,
+                        'page-size'  => 'A4',
+                        'footer-left' => '[date] - [time]',
+                        'footer-center' => $nombreFooter,
+                        'footer-right'  => 'Pag.: [page] de [topage]'
+                    )
+                    ),
                 200,
                 array(
                     'Content-Type'          => 'application/pdf',

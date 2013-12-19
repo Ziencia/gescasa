@@ -1,6 +1,15 @@
-#centrado{
+.centrado{
     text-align: center;
     margin-top:30px;
+    margin-bottom:30px;
+}
+
+.interlineas{
+    height:30px;
+}
+
+.interlineas_min{
+    height:20px;
 }
 
 #encabezado{
@@ -19,6 +28,23 @@
 #referencia{
     font-size:1.3em;
     font-weight:bold;
+}
+
+.etiqueta{
+    font-weight:bold;
+    margin-left:50px;
+    width:200px;
+    float:left;
+    text-align:right;
+    margin-right: 20px;
+}
+
+.centrado label{
+    font-weight:bold;
+}
+
+.descripcion{
+    margin-left:50px;
 }
 
 

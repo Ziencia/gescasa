@@ -6,35 +6,31 @@
     </head>
     <body>
         
-        <div id="centrado">
-        <label id="encabezado"> 
-            GESTOR DE EXPEDIENTES: GESCASA
-             - {{ "now"|date("Y") }} -
-        </label>
+        <div class="centrado">
+            <label id="encabezado"> 
+                GESTOR DE EXPEDIENTES: GESCASA - {{ "now"|date("Y") }} -
+            </label>
         
-        <br/><br/><br/>
+                <div class="interlineas"></div>
         
-        <label id="titulo">{{ expediente.titulo|default('') }}</label> <br/>
-        <label id="referencia">({{ expediente.referencia|default('') }})</label> <br/>
-            </div>
-        <br/><br/><br/>
-        
-        <label>ESTADO:</label><label> {{ expediente.estado|default('') }}</label><br/>
-        <label>EMPRESA:</label><label> {{ expediente.empresa|default('') }}</label><br/>
-        <label>ADJUDICATARIO:</label><label> {{ expediente.adjudicatario|default('') }}</label><br/>
-        <label>F. DE INICIO:</label><label> {{ expediente.fechaInicio|date("d/m/Y")|default('') }}</label><br/>
-        <label>F. DE CIERRE:</label><label> {{ expediente.fechaFin|date("d/m/Y")|default('') }}</label><br/>
-        <label>IMPORTE: {{ expediente.importe|number_format(3, ',', '.')|default('') }} €</label><br/>
-        
-        <br/><br/><br/>
-        
-        <label class="centrado">DESCRIPCIÓN:</label>
-        <label>{{ expediente.descripcion0|default('') }}</label><br/>
-        <label>{{ expediente.descripcion1|default('') }}</label><br/>
-        <label>{{ expediente.descripcion2|default('') }}</label><br/>
+            <label id="titulo">{{ expediente.titulo|default('') }}</label> <br/>
+            <label id="referencia">( Ref.: {{ expediente.referencia|default('') }})</label> <br/>
+        </div>
+                
+        <label class="etiqueta">ESTADO:</label><label> {{ expediente.estado|default('') }}</label><div class="interlineas_min"></div>
+        <label class="etiqueta">EMPRESA:</label><label> {{ expediente.empresa|default('') }}</label><div class="interlineas_min"></div>
+        <label class="etiqueta">ADJUDICATARIO:</label><label> {{ expediente.adjudicatario|default('') }}</label><div class="interlineas_min"></div>
+        <label class="etiqueta">F. DE INICIO:</label><label> {{ expediente.fechaInicio|date("d/m/Y")|default('') }}</label><div class="interlineas_min"></div>
+        <label class="etiqueta">F. DE CIERRE:</label><label> {{ expediente.fechaFin|date("d/m/Y")|default('') }}</label><div class="interlineas_min"></div>
+        <label class="etiqueta">IMPORTE:</label><label>{{ expediente.importe|number_format(3, ',', '.')|default('') }} €</label><div class="interlineas_min"></div>
+           
+        <div class="centrado"><label>DESCRIPCIÓN:</label></div>
+        <label class="descripcion">{{ expediente.descripcion0|default('') }}</label><div class="interlineas"></div>
+        <label class="descripcion">{{ expediente.descripcion1|default('') }}</label><div class="interlineas"></div>
+        <label class="descripcion">{{ expediente.descripcion2|default('') }}</label><div class="interlineas"></div><div class="interlineas"/>
 
-        <br/><br/><br/>
-
+        <div class="centrado"><label>MATERIALES:</label></div>
+        
  {% if informatica %}
             <section class="listado_materiales">
                 <div class="expedientes_info">Material informático del expediente</div>
@@ -45,32 +41,23 @@
                          {% else %}
                                 <tbody class="fila_impar">
                          {% endif %}
-                                <tr>
-                                    <td title="{{ material.tipo }}"><label>Tipo:</label> {{ material.tipo }}</td>
-                                    <td title="{{ material.marca}}"><label>Marca:</label> {{material.marca }}</td>
-                                    <td title="{{ material.modelo}}"><label>Modelo:</label> {{ material.modelo }}</td>
-                                    <td title="{{ material.numserie|default('')}}"><label>N. Serie:</label> {{ material.numserie|default('') }}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" title="{{ material.descripcion|default('')}}"><label>Descripción:</label> {{material.descripcion|default('')}}</td>
-                                </tr>       
-                                <tr>
-                                    <td colspan="4" title="{{ material.caracteristicas|default('')}}"><label>Caracteristicas:</label> {{material.caracteristicas|default('')}}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" title="{{ material.observaciones|default('')}}"><label>Observaciones:</label> {{material.observaciones|default('')}}</td>
-                                </tr>
-                                <tr>
-                                    <td title="{{ material.destino|default('')}}"><label>Destino:</label> {{material.destino|default('')}}</td>
-                                    <td title="{{ material.cantidad|default('')}}"><label>Cantidad:</label> {{material.cantidad|default('')}}</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                    <tr><td><label>Tipo:</label> {{ material.tipo }}</td></tr>
+                                    <tr><td><label>Marca:</label> {{material.marca }}</td></tr>
+                                    <tr><td><label>Modelo:</label> {{ material.modelo }}</td></tr>
+                                    <tr><td><label>N. Serie:</label> {{ material.numserie|default('') }}</td></tr>
+                                    <tr><td><label>Caracteristicas:</label> {{material.caracteristicas|default('')}}</td></tr>
+                                    <tr><td><label>Descripción:</label> {{material.descripcion|default('')}}</td></tr>       
+                                    <tr><td><label>Destino:</label> {{material.destino|default('')}}</td></tr>
+                                    <tr><td><label>Cantidad:</label> {{material.cantidad|default('')}}</td></tr>
+                                    <tr><td><label>Observaciones:</label> {{material.observaciones|default('')}}</td></tr>
                         </tbody>
                     </table>
                {% endfor %}
-
             </section>
-        {% endif %}
+ {% endif %}
+        
+        
+        
+        
         </body>
     </html>
