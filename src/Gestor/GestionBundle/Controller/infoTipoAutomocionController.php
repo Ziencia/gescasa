@@ -25,7 +25,11 @@ class infoTipoAutomocionController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('GestionBundle:infoTipoAutomocion')->findBy(array(),array('descripcion'=>'ASC'));
-
+        
+        $descripcion = 'INFO: Gestion, consulta de  tipo de material automocion';
+        $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+        $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+        
         return $this->render('GestionBundle:infoTipoAutomocion:index.html.twig', array(
             'entities' => $entities,
         ));

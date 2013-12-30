@@ -26,6 +26,10 @@ class infoTipoEmpresaController extends Controller
 
         $entities = $em->getRepository('GestionBundle:infoTipoEmpresa')->findBy(array(),array('descripcion'=>'ASC'));
 
+        $descripcion = 'INFO: Gestion, consulta de  empresas';
+        $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+        $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+        
         return $this->render('GestionBundle:infoTipoEmpresa:index.html.twig', array(
             'entities' => $entities,
         ));

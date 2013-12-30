@@ -1,0 +1,38 @@
+{# empty Twig template #}
+{% extends '::administracion.html.twig' %}
+
+{% block id 'usuario_listar' %}
+{% block title %}Auditoría del usuario {{usuario.tip}}{% endblock %}
+
+{% block contenido %}
+<h2>{{ block('title') }}</h2>
+<div class="limpiar"></div>
+
+<table class="tabla_datos">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Descripción</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for mensaje in mensajes %}
+            {% if loop.index is even %}
+                <tr class="fila_par">
+            {% else %}
+                <tr class="fila_impar">
+            {% endif %}
+                    <td>{{ mensaje.fecha|date("d/m/Y H:i:s") }}</td>
+                    <td>{{ mensaje.mensaje }}</td>
+               </tr>
+    {% endfor %}
+    </tbody>
+</table>
+        <div class="contenedor_administrador_acciones">
+            <ul class="administrador_acciones">
+                <li>
+                    <input type="button" value="Volver" class="boton" onclick="window.location='{{ path('administracion_usuario') }}';"/>               
+                </li>
+            </ul>
+            </div>
+{% endblock %}

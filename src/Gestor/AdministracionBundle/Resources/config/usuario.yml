@@ -40,3 +40,6 @@ administracion_usuario_listar_autorizados:
   path: /autorizados
   defaults: {_controller: "AdministracionBundle:Usuario:listarAutorizados"}
   
+administracion_usuario_ver_mensajes:
+  path: /mensajes/ver/{id}/
+  defaults: { _controller: "MensajeBundle:Mensaje:ver"}

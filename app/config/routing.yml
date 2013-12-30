@@ -1,7 +1,3 @@
-mensaje:
-    resource: "@MensajeBundle/Resources/config/routing.yml"
-    prefix:   /
-
 expedientes:
     resource: "@ExpedientesBundle/Resources/config/expediente.yml"
     prefix:   /expediente

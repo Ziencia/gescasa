@@ -1,5 +1,5 @@
 body {
-    background: #036 url('../images/fondo.jpg') fixed center center repeat-y; 
+    background: #036 url('/bundles/usuario/images/fondo.jpg') fixed center center repeat-y; 
     font: 1em Verdana, Arial, Helvetica, sans-serif; 
     color:#333;
 }
@@ -26,14 +26,8 @@ h2,h3{
 }
 
 #banner{
-    background: #DBF1FF url('../images/banner.png') no-repeat top left;
+    background: #DBF1FF url('/bundles/usuario/images/banner.png') no-repeat top left;
     background-color: #9CB8DD;
-    /*background-image: -webkit-gradient(linear, left top, left bottom, from(#9CB8DD), to(#0B5F89));
-    background-image: -webkit-linear-gradient(top, #9CB8DD, #0B5F89);
-    background-image: -moz-linear-gradient(top, #9CB8DD, #0B5F89);
-    background-image: -ms-linear-gradient(top, #9CB8DD, #0B5F89);
-    background-image: -o-linear-gradient(top, #9CB8DD, #0B5F89);
-    background-image: linear-gradient(top, #9CB8DD, #0B5F89);  */
     border: 1px solid #0B5F89;
     font-size: 1.2em;
     height: 55px;
@@ -243,6 +237,12 @@ span.no_autorizado{
     font-size: 1.1em;
 }
 
+.formulario_registro_usuario label.lbl_normal{
+    text-align:left;
+    width:350px;
+    font-weight:normal;
+}
+
 .formulario_registro_usuario input,.formulario_registro_usuario select{
     width: 200px;
     margin: 5px; 
@@ -280,6 +280,7 @@ span.no_autorizado{
     font-size: 0.7em;
     margin: 0 0 0 215px
 }
+
 .error{
     font-size: 0.7em;
     margin: 0 0 0 215px;
@@ -390,4 +391,20 @@ div.centrado{
 label.required::before{
     color:#036;
     content: "*";
+}
+
+#div_eliminar{
+    border:3px solid #000066;
+    border-radius:30px;
+    width: 80%;
+    margin: 50px auto;
+    padding: 30px;
+    text-align:center;
+}
+
+legend{
+    color: #000066;
+    display: block;
+    font-size: 1.17em;
+    font-weight: bold;
 }

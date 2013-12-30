@@ -1,16 +1,6 @@
-.desarrollo{
-    border: #fff 2px solid;
-    border-radius: 9px;
-    margin: 0 0;
-    color:#fff;
-    font-weight: bold;
-    display: inline-block;
-    font-size: 0.7em;
-}
-
 body
 {
-    background: #036 url('../images/fondo.jpg') fixed center center repeat-y; 
+    background: #036 url('/bundles/usuario/images/fondo.jpg') fixed center center repeat-y; 
     font: 1em Verdana, Arial, Helvetica, sans-serif; 
     color:#333;
     z-index: -2;
@@ -136,7 +126,7 @@ fieldset
 
 #inputs input
 {
-    background: #ddeaf3 url('../images/login-sprite.png') no-repeat;
+    background: #ddeaf3 url('/bundles/usuario/images/login-sprite.png') no-repeat;
     padding: 15px 15px 15px 30px;
     margin: 0 0 10px 0;
     width: 353px; /* 353 + 2 + 45 = 400 */

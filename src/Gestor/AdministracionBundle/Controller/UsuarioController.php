@@ -21,7 +21,8 @@ class UsuarioController extends Controller {
                
         return $this->render('AdministracionBundle:Usuario:index.html.twig', array(
             'entities'  => $entities,
-            'paginador' => $paginador
+            'paginador' => $paginador,
+            'ruta_paginador' => 'administracion_indice'
         ));
     }
 
@@ -255,7 +256,8 @@ class UsuarioController extends Controller {
 
         return $this->render('AdministracionBundle:Usuario:index.html.twig', array(
             'entities'  => $entities,
-            'paginador' => $paginador
+            'paginador' => $paginador,
+            'ruta_paginador' => 'administracion_usuario_autorizados'
         ));
     }
     

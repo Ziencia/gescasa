@@ -31,15 +31,15 @@
         </tr>
         <tr>
             <th>Largo:</th>
-            <td>{{ material.largo|default('') }} cm</td>
+            <td>{{ material.largo|number_format(2, ',', '.')|default('') }} cm</td>
         </tr>
         <tr>
             <th>Ancho:</th>
-            <td>{{ material.acho|default('') }} cm</td>
+            <td>{{ material.ancho|number_format(2, ',', '.')|default('') }} cm</td>
         </tr>
         <tr>
             <th>Alto:</th>
-            <td>{{ material.alto|default('') }} cm</td>
+            <td>{{ material.alto|number_format(2, ',', '.')|default('') }} cm</td>
         </tr>
         <tr>
             <th>Observaciones:</th>

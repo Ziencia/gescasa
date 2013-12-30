@@ -9,8 +9,3 @@ mobiliario_new:
 mobiliario_edit:
     pattern:  /{id}/editar
     defaults: { _controller: "GestionBundle:infoTipoMobiliario:edit" }
-
-mobiliario_update:
-    pattern:  /{id}/actualizar
-    defaults: { _controller: "GestionBundle:infoTipoMobiliario:update" }
-    requirements: { _method: post|put }

@@ -26,6 +26,10 @@ class infoTipoMobiliarioController extends Controller
 
         $entities = $em->getRepository('GestionBundle:infoTipoMobiliario')->findBy(array(),array('descripcion'=>'ASC'));
 
+        $descripcion = 'INFO: Gestion, consulta de  tipo de material mobiliario';
+        $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+        $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+        
         return $this->render('GestionBundle:infoTipoMobiliario:index.html.twig', array(
             'entities' => $entities,
         ));

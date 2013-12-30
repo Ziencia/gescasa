@@ -37,3 +37,11 @@ expediente_duplicar:
 expediente_pdf:
   path: /pdf/{id}/
   defaults: { _controller: "ExpedientesBundle:Expediente:pdf" }
+  
+expediente_eliminar:
+  path: /eliminar/{id}/
+  defaults: { _controller: "ExpedientesBundle:Expediente:eliminar" }
+  
+expediente_perfil:
+  path: /perfil
+  defaults: { _controller: "UsuarioBundle:Default:perfil" }

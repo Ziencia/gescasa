@@ -1,0 +1,29 @@
+{% extends 'ExpedientesBundle:Expediente:expedientes.html.twig' %}
+
+{% block id 'expediente_modificar' %}
+{% block title %}Eliminar el expediente {{expediente.referencia}}{% endblock %}
+
+{% block contenido %}
+    <h2>{{ block('title') }}</h2>
+    <div class="limpiar"></div>
+  
+    <div id="div_eliminar">
+    <form action="{{ path('expediente_eliminar', { 'id': expediente.id }) }}" method="post" {{form_enctype(formulario)}} class="formulario_registro_usuario">
+            {{ form_widget(formulario) }}
+        
+         <div class="expedientes_info">¡Atención!<br> Si decide eliminar el expediente el proceso será irreversible. <br> No será posible recuperar el mismo.</div>
+         
+         <div class="contenedor_administrador_acciones">
+            <ul class="administrador_acciones">
+                <li>
+                    <input class="boton" type="submit" value="Confirmar" />
+                </li>
+                <li>
+                    <input type="button" value="Cancelar" class="boton" onclick="window.location='{{ path('expediente_indice') }}';"/>               
+                </li>
+            </ul>
+            </div>        
+    </form>
+    </div>
+    
+{%endblock contenido %}

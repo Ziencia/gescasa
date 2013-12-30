@@ -27,6 +27,7 @@ class MaterialAutomocion
      * @var $expediente
      * 
      * @ORM\ManyToOne(targetEntity="Gestor\ExpedientesBundle\Entity\Expediente")
+     * @ORM\JoinColumn(name="expediente_id", referencedColumnName="id", onDelete="CASCADE")
      * @Assert\Type("Gestor\ExpedientesBundle\Entity\Expediente")
      */
     private $fkExpediente;

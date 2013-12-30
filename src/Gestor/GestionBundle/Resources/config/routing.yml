@@ -1,0 +1,4 @@
+gestion_info:
+    resource: "@GestionBundle/Resources/config/routing/info.yml"
+    prefix:   /info
+

@@ -1,7 +1,12 @@
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
-<link href="{{ asset('bundles/gestion/css/gestion.css') }}" rel="stylesheet" type="text/css" />
+        {% stylesheets '@UsuarioBundle/Resources/public/css/generico.css'
+                       '@GestionBundle/Resources/public/css/gestion.css' 
+                        output='css/gestion.css' filter='yui_css' %}
+            <link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+        {% endstylesheets %}
+            
 {% endblock %}
 
 {% block header %}
@@ -18,9 +23,11 @@
          </nav>
 {% endblock %}
 
+{% block id 'gestion' %}
+
 {% block body %}
         {% for mensaje in app.session.flashbag.get('info') %}
-            <div class="aviso_flash">{{ mensaje }}</p></div>
+            <div class="aviso_flash">{{ mensaje }}</div>
         {% endfor %}
             <div class="limpiar"></div>            
             

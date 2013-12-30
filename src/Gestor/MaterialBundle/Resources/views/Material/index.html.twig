@@ -144,9 +144,9 @@
                                     <td colspan="4" title="{{ material.descripcion|default('')}}"><label>Descripción:</label> {{material.descripcion|default('')}}</td>
                                 </tr>       
                                 <tr>
-                                    <td title="{{ material.largo|default('')}}"><label>Largo:</label> {{material.largo|default('')}} cm</td>
-                                    <td title="{{ material.ancho|default('')}}"><label>Ancho:</label> {{material.ancho|default('')}} cm</td>
-                                    <td colspan="2" title="{{ material.alto|default('')}}"><label>Alto:</label> {{material.alto|default('')}} cm</td>                               
+                                    <td title="{{ material.largo|default('')}}"><label>Largo:</label> {{material.largo|number_format(2, ',', '.')|default('')}} cm</td>
+                                    <td title="{{ material.ancho|default('')}}"><label>Ancho:</label> {{material.ancho|number_format(2, ',', '.')|default('')}} cm</td>
+                                    <td colspan="2" title="{{ material.alto|default('')}}"><label>Alto:</label> {{material.alto|number_format(2, ',', '.')|default('')}} cm</td>                               
                                
                                 </tr>
                                 <tr>

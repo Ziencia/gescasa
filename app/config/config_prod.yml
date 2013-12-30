@@ -11,6 +11,10 @@ imports:
 #        result_cache_driver: apc
 #        query_cache_driver: apc
 
+parameters:
+ router.options.matcher.cache_class: ~
+ router.options.matcher_class: Symfony\Component\Routing\Matcher\ApacheUrlMatcher
+
 monolog:
     handlers:
         main:
@@ -21,3 +25,9 @@ monolog:
             type:  stream
             path:  %kernel.logs_dir%/%kernel.environment%.log
             level: debug
+
+doctrine:
+    orm:
+        metadata_cache_driver: apc
+        query_cache_driver: apc
+       

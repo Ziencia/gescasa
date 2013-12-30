@@ -9,8 +9,3 @@ adjudicatario_new:
 adjudicatario_edit:
     pattern:  /{id}/editar
     defaults: { _controller: "GestionBundle:infoTipoAdjudicatario:edit" }
-
-adjudicatario_update:
-    pattern:  /{id}/actualizar
-    defaults: { _controller: "GestionBundle:infoTipoAdjudicatario:update" }
-    requirements: { _method: post|put }

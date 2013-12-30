@@ -1,0 +1,378 @@
+
+Warning: PHP Startup: Unable to load dynamic library 'C:\xampp\php\ext\apc.so' - No se puede encontrar el módulo especificado.
+ in Unknown on line 0
+# skip "real" requests
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule .* - [QSA,L]
+
+# expediente_indice
+RewriteCond %{REQUEST_URI} ^/expediente$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/expediente/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:expediente_indice,E=_ROUTING_default__controller:Gestor\\ExpedientesBundle\\Controller\\ExpedienteController\:\:indexAction]
+
+# expediente_buscar_basico
+RewriteCond %{REQUEST_URI} ^/expediente/buscar/basico$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/expediente/buscar/basico/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:expediente_buscar_basico,E=_ROUTING_default__controller:Gestor\\ExpedientesBundle\\Controller\\ExpedienteController\:\:buscarBasicoAction]
+
+# expediente_buscar_avanzado
+RewriteCond %{REQUEST_URI} ^/expediente/buscar/avanzado$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/expediente/buscar/avanzado/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:expediente_buscar_avanzado,E=_ROUTING_default__controller:Gestor\\ExpedientesBundle\\Controller\\ExpedienteController\:\:buscarAvanzadoAction]
+
+# expediente_listar
+RewriteCond %{REQUEST_URI} ^/expediente/listar$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/expediente/listar/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:expediente_listar,E=_ROUTING_default__controller:Gestor\\ExpedientesBundle\\Controller\\ExpedienteController\:\:listarAction]
+
+# expediente_crear
+RewriteCond %{REQUEST_URI} ^/expediente/nuevo$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/expediente/nuevo/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:expediente_crear,E=_ROUTING_default__controller:Gestor\\ExpedientesBundle\\Controller\\ExpedienteController\:\:nuevoAction]
+
+# expediente_ver
+RewriteCond %{REQUEST_URI} ^/expediente/ver/([^/]++)$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/expediente/ver/([^/]++)/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:expediente_ver,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\ExpedientesBundle\\Controller\\ExpedienteController\:\:verAction]
+
+# expediente_filtrar_estado
+RewriteCond %{REQUEST_URI} ^/expediente/filtrar/([^/]++)$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/expediente/filtrar/([^/]++)/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:expediente_filtrar_estado,E=_ROUTING_param_estado:%1,E=_ROUTING_default__controller:Gestor\\ExpedientesBundle\\Controller\\ExpedienteController\:\:filtrarAction]
+
+# expediente_editar
+RewriteCond %{REQUEST_URI} ^/expediente/editar/([^/]++)$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/expediente/editar/([^/]++)/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:expediente_editar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\ExpedientesBundle\\Controller\\ExpedienteController\:\:editarAction]
+
+# expediente_duplicar
+RewriteCond %{REQUEST_URI} ^/expediente/duplicar/([^/]++)$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/expediente/duplicar/([^/]++)/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:expediente_duplicar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\ExpedientesBundle\\Controller\\ExpedienteController\:\:duplicarAction]
+
+# expediente_pdf
+RewriteCond %{REQUEST_URI} ^/expediente/pdf/([^/]++)$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/expediente/pdf/([^/]++)/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:expediente_pdf,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\ExpedientesBundle\\Controller\\ExpedienteController\:\:pdfAction]
+
+# expediente_eliminar
+RewriteCond %{REQUEST_URI} ^/expediente/eliminar/([^/]++)$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/expediente/eliminar/([^/]++)/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:expediente_eliminar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\ExpedientesBundle\\Controller\\ExpedienteController\:\:eliminarAction]
+
+# expediente_perfil
+RewriteCond %{REQUEST_URI} ^/expediente/perfil$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:expediente_perfil,E=_ROUTING_default__controller:Gestor\\UsuarioBundle\\Controller\\DefaultController\:\:perfilAction]
+
+# material_indice
+RewriteCond %{REQUEST_URI} ^/material/([^/]++)$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_indice,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialController\:\:indexAction]
+
+# material_informatico
+RewriteCond %{REQUEST_URI} ^/material/([^/]++)/informatico$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/material/([^/]++)/informatico/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_informatico,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialController\:\:informaticoAction]
+
+# material_informatico_ver
+RewriteCond %{REQUEST_URI} ^/material/informatico/([^/]++)$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_informatico_ver,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialController\:\:informaticoVerAction]
+
+# material_informatico_editar
+RewriteCond %{REQUEST_URI} ^/material/informatico/([^/]++)/editar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_informatico_editar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialController\:\:informaticoEditarAction]
+
+# material_informatico_eliminar
+RewriteCond %{REQUEST_URI} ^/material/informatico/([^/]++)/borrar$
+RewriteCond %{REQUEST_METHOD} !^(POST)$ [NC]
+RewriteRule .* - [S=1,E=_ROUTING_allow_POST:1]
+RewriteCond %{REQUEST_URI} ^/material/informatico/([^/]++)/borrar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_informatico_eliminar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialController\:\:informaticoBorrarAction]
+
+# material_operativo
+RewriteCond %{REQUEST_URI} ^/material/([^/]++)/operativo$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/material/([^/]++)/operativo/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_operativo,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialPolicialController\:\:policialAction]
+
+# material_operativo_ver
+RewriteCond %{REQUEST_URI} ^/material/operativo/([^/]++)$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_operativo_ver,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialPolicialController\:\:policialVerAction]
+
+# material_operativo_editar
+RewriteCond %{REQUEST_URI} ^/material/operativo/([^/]++)/editar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_operativo_editar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialPolicialController\:\:policialEditarAction]
+
+# material_operativo_eliminar
+RewriteCond %{REQUEST_URI} ^/material/operativo/([^/]++)/borrar$
+RewriteCond %{REQUEST_METHOD} !^(POST)$ [NC]
+RewriteRule .* - [S=1,E=_ROUTING_allow_POST:1]
+RewriteCond %{REQUEST_URI} ^/material/operativo/([^/]++)/borrar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_operativo_eliminar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialPolicialController\:\:policialBorrarAction]
+
+# material_automocion
+RewriteCond %{REQUEST_URI} ^/material/([^/]++)/automocion$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/material/([^/]++)/automocion/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_automocion,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialAutomocionController\:\:automocionAction]
+
+# material_automocion_ver
+RewriteCond %{REQUEST_URI} ^/material/automocion/([^/]++)$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_automocion_ver,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialAutomocionController\:\:automocionVerAction]
+
+# material_automocion_editar
+RewriteCond %{REQUEST_URI} ^/material/automocion/([^/]++)/editar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_automocion_editar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialAutomocionController\:\:automocionEditarAction]
+
+# material_automocion_eliminar
+RewriteCond %{REQUEST_URI} ^/material/automocion/([^/]++)/borrar$
+RewriteCond %{REQUEST_METHOD} !^(POST)$ [NC]
+RewriteRule .* - [S=1,E=_ROUTING_allow_POST:1]
+RewriteCond %{REQUEST_URI} ^/material/automocion/([^/]++)/borrar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_automocion_eliminar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialAutomocionController\:\:automocionBorrarAction]
+
+# material_mobiliario
+RewriteCond %{REQUEST_URI} ^/material/([^/]++)/mobiliario$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/material/([^/]++)/mobiliario/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_mobiliario,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialMobiliarioController\:\:mobiliarioAction]
+
+# material_mobiliario_ver
+RewriteCond %{REQUEST_URI} ^/material/mobiliario/([^/]++)$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_mobiliario_ver,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialMobiliarioController\:\:mobiliarioVerAction]
+
+# material_mobiliario_editar
+RewriteCond %{REQUEST_URI} ^/material/mobiliario/([^/]++)/editar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_mobiliario_editar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialMobiliarioController\:\:mobiliarioEditarAction]
+
+# material_mobiliario_eliminar
+RewriteCond %{REQUEST_URI} ^/material/mobiliario/([^/]++)/borrar$
+RewriteCond %{REQUEST_METHOD} !^(POST)$ [NC]
+RewriteRule .* - [S=1,E=_ROUTING_allow_POST:1]
+RewriteCond %{REQUEST_URI} ^/material/mobiliario/([^/]++)/borrar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_mobiliario_eliminar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialMobiliarioController\:\:mobiliarioBorrarAction]
+
+# material_vestuario
+RewriteCond %{REQUEST_URI} ^/material/([^/]++)/vestuario$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/material/([^/]++)/vestuario/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_vestuario,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialVestuarioController\:\:vestuarioAction]
+
+# material_vestuario_ver
+RewriteCond %{REQUEST_URI} ^/material/vestuario/([^/]++)$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_vestuario_ver,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialVestuarioController\:\:vestuarioVerAction]
+
+# material_vestuario_editar
+RewriteCond %{REQUEST_URI} ^/material/vestuario/([^/]++)/editar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_vestuario_editar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialVestuarioController\:\:vestuarioEditarAction]
+
+# material_vestuario_eliminar
+RewriteCond %{REQUEST_URI} ^/material/vestuario/([^/]++)/borrar$
+RewriteCond %{REQUEST_METHOD} !^(POST)$ [NC]
+RewriteRule .* - [S=1,E=_ROUTING_allow_POST:1]
+RewriteCond %{REQUEST_URI} ^/material/vestuario/([^/]++)/borrar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:material_vestuario_eliminar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MaterialBundle\\Controller\\MaterialVestuarioController\:\:vestuarioBorrarAction]
+
+# portada
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:portada,E=_ROUTING_default__controller:Gestor\\UsuarioBundle\\Controller\\DefaultController\:\:indexAction]
+
+# usuario_login
+RewriteCond %{REQUEST_URI} ^/login$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:usuario_login,E=_ROUTING_default__controller:Gestor\\UsuarioBundle\\Controller\\DefaultController\:\:loginAction]
+
+# usuario_login_check
+RewriteCond %{REQUEST_URI} ^/login_check$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:usuario_login_check]
+
+# usuario_logout
+RewriteCond %{REQUEST_URI} ^/logout$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:usuario_logout,E=_ROUTING_default__controller:Gestor\\UsuarioBundle\\Controller\\DefaultController\:\:logoutAction]
+
+# administracion
+RewriteCond %{REQUEST_URI} ^/administracion$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/administracion/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:administracion,E=_ROUTING_default__controller:Gestor\\AdministracionBundle\\Controller\\UsuarioController\:\:indexAction]
+
+# administracion_usuario
+RewriteCond %{REQUEST_URI} ^/administracion/usuario$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:administracion_usuario,E=_ROUTING_default__controller:Gestor\\AdministracionBundle\\Controller\\UsuarioController\:\:indexAction]
+
+# administracion_usuario_crear
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/registro$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/registro/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:administracion_usuario_crear,E=_ROUTING_default__controller:Gestor\\AdministracionBundle\\Controller\\UsuarioController\:\:registroAction]
+
+# administracion_usuario_ver
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/ver/([^/]++)$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/ver/([^/]++)/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:administracion_usuario_ver,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\AdministracionBundle\\Controller\\UsuarioController\:\:verAction]
+
+# administracion_usuario_editar
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/editar/([^/]++)$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/editar/([^/]++)/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:administracion_usuario_editar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\AdministracionBundle\\Controller\\UsuarioController\:\:editarAction]
+
+# administracion_usuario_actualizar
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/actualizar/([^/]++)$
+RewriteCond %{REQUEST_METHOD} !^(POST)$ [NC]
+RewriteRule .* - [S=1,E=_ROUTING_allow_POST:1]
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/actualizar/([^/]++)$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:administracion_usuario_actualizar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\AdministracionBundle\\Controller\\UsuarioController\:\:actualizarAction]
+
+# administracion_usuario_borrar
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/borrar/([^/]++)/$
+RewriteCond %{REQUEST_METHOD} !^(POST)$ [NC]
+RewriteRule .* - [S=1,E=_ROUTING_allow_POST:1]
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/borrar/([^/]++)/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:administracion_usuario_borrar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\AdministracionBundle\\Controller\\UsuarioController\:\:borrarAction]
+
+# administracion_usuario_deshabilitar
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/deshabilitar/([^/]++)/$
+RewriteCond %{REQUEST_METHOD} !^(POST)$ [NC]
+RewriteRule .* - [S=1,E=_ROUTING_allow_POST:1]
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/deshabilitar/([^/]++)/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:administracion_usuario_deshabilitar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\AdministracionBundle\\Controller\\UsuarioController\:\:deshabilitarAction]
+
+# administracion_usuario_habilitar
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/habilitar/([^/]++)/$
+RewriteCond %{REQUEST_METHOD} !^(POST)$ [NC]
+RewriteRule .* - [S=1,E=_ROUTING_allow_POST:1]
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/habilitar/([^/]++)/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:administracion_usuario_habilitar,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\AdministracionBundle\\Controller\\UsuarioController\:\:habilitarAction]
+
+# administracion_usuario_listar_autorizados
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/autorizados$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:administracion_usuario_listar_autorizados,E=_ROUTING_default__controller:Gestor\\AdministracionBundle\\Controller\\UsuarioController\:\:listarAutorizadosAction]
+
+# administracion_usuario_ver_mensajes
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/mensajes/ver/([^/]++)$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/administracion/usuario/mensajes/ver/([^/]++)/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:administracion_usuario_ver_mensajes,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\MensajeBundle\\Controller\\MensajeController\:\:verAction]
+
+# gestion_indice
+RewriteCond %{REQUEST_URI} ^/gestion$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/gestion/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:gestion_indice,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\GestionController\:\:indiceAction]
+
+# vestuario_index
+RewriteCond %{REQUEST_URI} ^/gestion/vestuario$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/gestion/vestuario/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:vestuario_index,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoVestuarioController\:\:indexAction]
+
+# vestuario_new
+RewriteCond %{REQUEST_URI} ^/gestion/vestuario/nuevo$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:vestuario_new,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoVestuarioController\:\:newAction]
+
+# vestuario_edit
+RewriteCond %{REQUEST_URI} ^/gestion/vestuario/([^/]++)/editar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:vestuario_edit,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoVestuarioController\:\:editAction]
+
+# adjudicatario_index
+RewriteCond %{REQUEST_URI} ^/gestion/adjudicatario$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/gestion/adjudicatario/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:adjudicatario_index,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoAdjudicatarioController\:\:indexAction]
+
+# adjudicatario_new
+RewriteCond %{REQUEST_URI} ^/gestion/adjudicatario/nuevo$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:adjudicatario_new,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoAdjudicatarioController\:\:newAction]
+
+# adjudicatario_edit
+RewriteCond %{REQUEST_URI} ^/gestion/adjudicatario/([^/]++)/editar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:adjudicatario_edit,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoAdjudicatarioController\:\:editAction]
+
+# automocion_index
+RewriteCond %{REQUEST_URI} ^/gestion/automocion$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/gestion/automocion/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:automocion_index,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoAutomocionController\:\:indexAction]
+
+# automocion_new
+RewriteCond %{REQUEST_URI} ^/gestion/automocion/nuevo$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:automocion_new,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoAutomocionController\:\:newAction]
+
+# automocion_edit
+RewriteCond %{REQUEST_URI} ^/gestion/automocion/([^/]++)/editar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:automocion_edit,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoAutomocionController\:\:editAction]
+
+# empresa_index
+RewriteCond %{REQUEST_URI} ^/gestion/empresa$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/gestion/empresa/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:empresa_index,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoEmpresaController\:\:indexAction]
+
+# empresa_new
+RewriteCond %{REQUEST_URI} ^/gestion/empresa/nuevo$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:empresa_new,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoEmpresaController\:\:newAction]
+
+# empresa_edit
+RewriteCond %{REQUEST_URI} ^/gestion/empresa/([^/]++)/editar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:empresa_edit,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoEmpresaController\:\:editAction]
+
+# informatica_index
+RewriteCond %{REQUEST_URI} ^/gestion/informatica$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/gestion/informatica/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:informatica_index,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoInformaticaController\:\:indexAction]
+
+# informatica_new
+RewriteCond %{REQUEST_URI} ^/gestion/informatica/nuevo$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:informatica_new,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoInformaticaController\:\:newAction]
+
+# informatica_edit
+RewriteCond %{REQUEST_URI} ^/gestion/informatica/([^/]++)/editar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:informatica_edit,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoInformaticaController\:\:editAction]
+
+# mobiliario_index
+RewriteCond %{REQUEST_URI} ^/gestion/mobiliario$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/gestion/mobiliario/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:mobiliario_index,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoMobiliarioController\:\:indexAction]
+
+# mobiliario_new
+RewriteCond %{REQUEST_URI} ^/gestion/mobiliario/nuevo$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:mobiliario_new,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoMobiliarioController\:\:newAction]
+
+# mobiliario_edit
+RewriteCond %{REQUEST_URI} ^/gestion/mobiliario/([^/]++)/editar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:mobiliario_edit,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoMobiliarioController\:\:editAction]
+
+# operativo_index
+RewriteCond %{REQUEST_URI} ^/gestion/operativo$
+RewriteRule .* $0/ [QSA,L,R=301]
+RewriteCond %{REQUEST_URI} ^/gestion/operativo/$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:operativo_index,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoOperativoController\:\:indexAction]
+
+# operativo_new
+RewriteCond %{REQUEST_URI} ^/gestion/operativo/nuevo$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:operativo_new,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoOperativoController\:\:newAction]
+
+# operativo_edit
+RewriteCond %{REQUEST_URI} ^/gestion/operativo/([^/]++)/editar$
+RewriteRule .* app.php [QSA,L,E=_ROUTING_route:operativo_edit,E=_ROUTING_param_id:%1,E=_ROUTING_default__controller:Gestor\\GestionBundle\\Controller\\infoTipoOperativoController\:\:editAction]
+
+# 405 Method Not Allowed
+RewriteCond %{ENV:_ROUTING__allow_POST} =1
+RewriteRule .* app.php [QSA,L]
+

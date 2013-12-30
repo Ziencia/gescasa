@@ -2,8 +2,15 @@
 {% form_theme formulario 'AdministracionBundle:Form:errores.html.twig' %}
 
 {% block javascript %}
-        <script src="{{ asset('bundles/expedientes/js/jquery-1.10.2.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('bundles/expedientes/js/autoNumeric.js') }}" type="text/javascript"></script>
+    {% javascripts 
+        '@ExpedientesBundle/Resources/public/js/jquery-1.10.2.min.js'
+        '@ExpedientesBundle/Resources/public/js/autoNumeric.js'
+        '@ExpedientesBundle/Resources/public/js/limiter.js'
+        output='js/script.js'
+        filter='yui_js' 
+     %}
+        <script src="{{ asset_url }}" type="text/javascript"></script>
+     {% endjavascripts %}
 {% endblock %}
         
 {% block id 'expediente_nuevo' %}
@@ -17,7 +24,7 @@
     {{ form_errors(formulario) }}
         
         <fieldset>
-            <legend><h3>Datos del expediente</h3></legend>
+            <legend>Datos del expediente</legend>
             
             <div>
                 {{ form_errors(formulario.titulo) }}
@@ -64,16 +71,19 @@
                 {{ form_errors(formulario.descripcion0) }}
                 {{ form_label(formulario.descripcion0)  }}                
                 {{ form_widget(formulario.descripcion0, { 'attr': { 'class': 'formulario_input_textarea' } }) }}
+                <p class="ayuda">Restantes: <span id="chars0">255</span></p>
             </div>
             <div>
                 {{ form_errors(formulario.descripcion1) }}
                 {{ form_label(formulario.descripcion1)  }}                
                 {{ form_widget(formulario.descripcion1, { 'attr': { 'class': 'formulario_input_textarea' } }) }}
+                    <p class="ayuda">Restantes: <span id="chars1">255</span></p>
             </div>
             <div>
                 {{ form_errors(formulario.descripcion2) }}
                 {{ form_label(formulario.descripcion2)  }}                
                 {{ form_widget(formulario.descripcion2, { 'attr': { 'class': 'formulario_input_textarea' } }) }}
+                    <p class="ayuda">Restantes: <span id="chars2">255</span></p>
             </div>    
             {{ form_rest(formulario) }}
             
@@ -93,9 +103,18 @@
 {%endblock contenido %}
     
        {% block javascripts %}
-<script type="text/javascript" language="javascript">
+<script type="text/javascript">
 jQuery(function($) {
     $('.formulario_input_numero').autoNumeric('init');
 });    
+
+var elem = $("#chars0");
+$("#gestor_expedientesbundle_expedientetype_descripcion0").limiter(255, elem);
+
+var elem2 = $("#chars1");
+$("#gestor_expedientesbundle_expedientetype_descripcion1").limiter(255, elem2);
+
+var elem3= $("#chars2");
+$("#gestor_expedientesbundle_expedientetype_descripcion2").limiter(255, elem3);
 </script>
 {% endblock %}

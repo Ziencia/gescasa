@@ -1,0 +1,4 @@
+Dumping all dev assets.
+Debug mode is on.
+
+11:44:44 [file+] C:/xampp/htdocs/gescasa/app/../web/css/c86518b.css

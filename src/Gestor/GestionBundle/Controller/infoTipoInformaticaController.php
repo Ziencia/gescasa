@@ -26,6 +26,10 @@ class infoTipoInformaticaController extends Controller
 
         $entities = $em->getRepository('GestionBundle:infoTipoInformatica')->findBy(array(),array('descripcion'=>'ASC'));
 
+        $descripcion = 'INFO: Gestion, consulta de  tipo de material informatica';
+        $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+        $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+        
         return $this->render('GestionBundle:infoTipoInformatica:index.html.twig', array(
             'entities' => $entities,
         ));

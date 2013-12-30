@@ -1,7 +1,11 @@
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
-<link href="{{ asset('bundles/expedientes/css/expedientes.css') }}" rel="stylesheet" type="text/css" />
+        {% stylesheets '@UsuarioBundle/Resources/public/css/generico.css'
+                       '@ExpedientesBundle/Resources/public/css/expedientes.css' 
+                        output='css/expedientes.css' filter='yui_css' %}
+            <link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+        {% endstylesheets %}
 {% endblock %}
 
 {% block header %}
@@ -11,13 +15,14 @@
                 <li><a href="{{ path('expediente_crear') }}">NUEVO</a></li>
                 <li><a href="{{ path('expediente_buscar_avanzado') }}">BÚSQUEDA AVANZADA</a></li>
                 <li><a href="{{ path('expediente_listar') }}">MOSTRAR TODOS</a></li>
+                <li><a href="{{ path('expediente_perfil') }}">PERFIL</a></li>
             </ul>
          </nav>
 {% endblock %}
 
 {% block body %}
         {% for mensaje in app.session.flashbag.get('info') %}
-            <div class="aviso_flash">{{ mensaje }}</p></div>
+            <div class="aviso_flash">{{ mensaje }}</div>
         {% endfor %}
             <div class="limpiar"></div>
         {% block contenido %}{% endblock contenido %}

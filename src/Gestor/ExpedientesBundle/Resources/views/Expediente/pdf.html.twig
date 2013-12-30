@@ -84,9 +84,9 @@
                                     <tr><td><label>Modelo:</label> {{ material.modelo }}</td></tr>
                                     <tr><td><label>N. Serie:</label> {{ material.numserie|default('') }}</td></tr>
                                     <tr><td><label>Descripción:</label> {{material.descripcion|default('')}}</td></tr>     
-                                    <tr><td><label>Largo:</label> {{material.largo|default('')}} cm</td></tr>  
-                                    <tr><td><label>Ancho:</label> {{material.ancho|default('')}} cm</td></tr>  
-                                    <tr><td><label>Alto:</label> {{material.alto|default('')}} cm</td></tr>                                 
+                                    <tr><td><label>Largo:</label> {{material.largo|number_format(2, ',', '.')|default('')}} cm</td></tr>  
+                                    <tr><td><label>Ancho:</label> {{material.ancho|number_format(2, ',', '.')|default('')}} cm</td></tr>  
+                                    <tr><td><label>Alto:</label> {{material.alto|number_format(2, ',', '.')|default('')}} cm</td></tr>                                 
                                     <tr><td><label>Destino:</label> {{material.destino|default('')}}</td></tr>
                                     <tr><td><label>Cantidad:</label> {{material.cantidad|default('')}}</td></tr>
                                     <tr><td><label>Observaciones:</label> {{material.observaciones|default('')}}</td></tr>

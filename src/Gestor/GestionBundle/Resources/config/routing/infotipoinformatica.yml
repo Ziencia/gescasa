@@ -9,8 +9,3 @@ informatica_new:
 informatica_edit:
     pattern:  /{id}/editar
     defaults: { _controller: "GestionBundle:infoTipoInformatica:edit" }
-
-informatica_update:
-    pattern:  /{id}/actualizar
-    defaults: { _controller: "GestionBundle:infoTipoInformatica:update" }
-    requirements: { _method: post|put }

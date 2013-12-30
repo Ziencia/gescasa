@@ -1,0 +1,3 @@
+mensajes_usuario:
+    pattern:  /auditoria/{id}
+    defaults: { _controller: MensajeBundle:Mensaje:ver }

@@ -26,6 +26,10 @@ class infoTipoOperativoController extends Controller
 
         $entities = $em->getRepository('GestionBundle:infoTipoPolicial')->findBy(array(),array('descripcion'=>'ASC'));
 
+        $descripcion = 'INFO: Gestion, consulta de  tipo de material operativo';
+        $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+        $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+        
         return $this->render('GestionBundle:infoTipoOperativo:index.html.twig', array(
             'entities' => $entities,
         ));

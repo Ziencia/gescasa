@@ -9,8 +9,3 @@ operativo_new:
 operativo_edit:
     pattern:  /{id}/editar
     defaults: { _controller: "GestionBundle:infoTipoOperativo:edit" }
-
-operativo_update:
-    pattern:  /{id}/actualizar
-    defaults: { _controller: "GestionBundle:infoTipoOperativo:update" }
-    requirements: { _method: post|put }

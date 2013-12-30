@@ -49,7 +49,7 @@
                         <a href="{{ path('administracion_usuario_editar', { 'id': usuario.id }) }}"><img src="{{ asset('bundles/usuario/images/Writing.png') }}" alt="Editar" title="Editar" class="imagen_pequeña"/></a>
                     </li>
                     <li>
-                        <a href="###"><img src="{{ asset('bundles/usuario/images/Word-Processor.png') }}" alt="Mensajes" title="Mensajes" class="imagen_pequeña"/></a>
+                        <a href="{{ path('administracion_usuario_ver_mensajes', {'id': usuario.id }) }} "><img src="{{ asset('bundles/usuario/images/Word-Processor.png') }}" alt="Mensajes" title="Mensajes" class="imagen_pequeña"/></a>
                     </li>
                 </ul>
             </td>
@@ -57,7 +57,16 @@
     {% endfor %}
     </tbody>
 </table>
-{% include 'AdministracionBundle:Default:paginador.html.twig'  with { 'ruta': 'administracion_usuario' } only %}
+
+
+    {% if ruta_paginador=='administracion_indice' %}
+        {% include 'AdministracionBundle:Default:paginador.html.twig'  with { 'ruta': 'administracion_usuario' } only %}
+    {% elseif ruta_paginador=='administracion_usuario_autorizados' %}
+        {% include 'AdministracionBundle:Default:paginador_usuario_filtro.html.twig'  with { 'ruta': 'administracion_usuario_listar_autorizados' } %}
+    {% endif %}
+
+
+
  <div class="contenedor_administrador_acciones">
     <ul class="administrador_acciones">
         <li>

@@ -3,7 +3,6 @@
 namespace Gestor\ExpedientesBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Request;
 use Gestor\ExpedientesBundle\Entity\Expediente;
 use Gestor\MensajeBundle\Entity\Mensaje;
@@ -25,6 +24,12 @@ class ExpedienteController extends Controller {
         
         $exp_info='';
         
+        $descripcion = 'INFO: Expediente indice';
+        $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+        $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+        
+        $em->flush();
+            
         return $this->render('ExpedientesBundle:Expediente:index.html.twig', array(
             'entities'  => $entities,
             'paginador' => $paginador,
@@ -38,14 +43,17 @@ class ExpedienteController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $entities  = $em->getRepository('ExpedientesBundle:Expediente')->findTodosExpedientesDesc();
-               
+        
+            $descripcion = 'INFO: Expediente listar' ;
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+            
         return $this->render('ExpedientesBundle:Expediente:listar.html.twig', array(
             'entities'  => $entities
         ));
     }
     
-    public function nuevoAction(){
-        $peticion = $this->getRequest();
+    public function nuevoAction(Request $peticion){
         
         $entity = new Expediente();
         $entity->setFechaInicio(new \DateTime('today'));
@@ -55,9 +63,7 @@ class ExpedienteController extends Controller {
         $formulario->handleRequest($peticion);
 
         if ($formulario->isValid()) {
-         // $this->get('session')->getFlashBag()->add('info', 'Usuario dado de alta con fecha ' . $expediente->getTitulo() . ' ' . $expediente->getEstado() );
-            //$entity->getFechaAlta()->format('d-m-yy')
-          
+            
             $importe = $formulario->get('importe')->getData();
             $importe = substr($importe, 0, strpos($importe, ' '));
             $importe = str_replace('.', '', $importe);
@@ -69,6 +75,13 @@ class ExpedienteController extends Controller {
             $em->persist($entity);
             $em->flush();
             
+            $flash = 'Expediente creado';
+            $this->get('session')->getFlashBag()->add('info', $flash);
+            
+            $descripcion = 'INFO: Expediente nuevo, referencia: ' . $entity->getReferencia();
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+            
             return $this->redirect($this->generateUrl('expediente_indice'));
         }
         //$this->get('session')->getFlashBag()->add('info', 'Usuario dado de alta con fecha ' . $expediente->getTitulo() . ' ' . $expediente->getEstado() );
@@ -78,10 +91,8 @@ class ExpedienteController extends Controller {
     );
     }
     
-    public function editarAction($id){
+    public function editarAction(Request $peticion, Expediente $expediente){
         $em = $this->getDoctrine()->getManager();
-
-        $expediente = $em->getRepository('ExpedientesBundle:Expediente')->find($id);
 
         if (!$expediente) {
             throw $this->createNotFoundException('No se ha encontrado el expediente solicitado');
@@ -89,9 +100,7 @@ class ExpedienteController extends Controller {
 
         $formulario   = $this->createForm(new ExpedienteType(), $expediente);
 
-        $request = $this->getRequest();
-
-        $formulario->handleRequest($request);
+        $formulario->handleRequest($peticion);
 
         if ($formulario->isValid()) {
             
@@ -104,10 +113,10 @@ class ExpedienteController extends Controller {
             
             $em->persist($expediente);
 
-            $flash = 'El expediente ha sido actualizado';
+            $flash = 'Expediente actualizado';
             $this->get('session')->getFlashBag()->add('info', $flash);
             
-            $descripcion = 'INFO: Modicación expediente. ID: ' .$expediente->getId() . ' Expediente ' . $expediente->getReferencia() ;
+            $descripcion = 'INFO: Expediente editar, referencia: ' . $expediente->getReferencia() ;
             $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
             $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
         
@@ -124,10 +133,8 @@ class ExpedienteController extends Controller {
         )); 
     }
     
-    public function duplicarAction($id){
+    public function duplicarAction(Request $peticion,Expediente $expediente){
         $em = $this->getDoctrine()->getManager();
-
-        $expediente = $em->getRepository('ExpedientesBundle:Expediente')->find($id);
 
         if (!$expediente) {
             throw $this->createNotFoundException('No se ha encontrado el expediente solicitado');
@@ -141,10 +148,9 @@ class ExpedienteController extends Controller {
 
         $formulario   = $this->createForm(new ExpedienteType(), $expediente2);
 
-        $request = $this->getRequest();
+        $formulario->handleRequest($peticion);
 
-        $formulario->handleRequest($request);
-
+        // se deriva a crear
         if ($formulario->isValid()) {
             
             $importe = $formulario->get('importe')->getData();
@@ -156,10 +162,10 @@ class ExpedienteController extends Controller {
             
             $em->persist($expediente2);
 
-            $flash = 'El expediente ha sido creado';
+            $flash = 'Expediente duplicado';
             $this->get('session')->getFlashBag()->add('info', $flash);
             
-            $descripcion = 'INFO: Creación de expediente. ID: ' .$expediente->getId() . ' Expediente ' . $expediente->getReferencia() ;
+            $descripcion = 'INFO: Duplicar expediente, referencia: ' . $expediente->getReferencia() . ', nuevo expediente: ' . $expediente2->getReferencia();
             $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
             $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
         
@@ -175,17 +181,15 @@ class ExpedienteController extends Controller {
         )); 
     }
     
-    public function verAction($id){
+    public function verAction(Expediente $expediente){
         
         $em = $this->getDoctrine()->getManager();
-        
-        $expediente = $em->getRepository('ExpedientesBundle:Expediente')->find($id);
-        
+                
         if (!$expediente) {
             throw $this->createNotFoundException('No existe este expediente');
         }
 
-        $descripcion = 'INFO: Consulta expediente con referencia: ' . $expediente->getReferencia() ;
+        $descripcion = 'INFO: Expediente ver, referencia: ' . $expediente->getReferencia() ;
         $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
         $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
            
@@ -209,6 +213,12 @@ class ExpedienteController extends Controller {
         else
             $exp_info='<div class="expedientes_info">No se han encontrado expedientes que cumplan los criterios de búsqueda</div>';
        
+        $descripcion = 'INFO: Expediente filtrar, estado: ' . $estado;
+        $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+        $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+        
+        $em->flush();
+        
         return $this->render('ExpedientesBundle:Expediente:index.html.twig', array(
             'entities'  => $entities,
             'paginador' => $paginador,
@@ -232,6 +242,10 @@ class ExpedienteController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $exp_info='';
         
+            $descripcion = 'INFO: Expediente buscar basico,campo: ' .$cadenaTitulo .' , o campo: '.$cadenaTitulo2 ;
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+            
         if (!empty($cadenaTitulo)){
             $entities  = $paginador->paginate(        
                 $em->getRepository('ExpedientesBundle:Expediente')->queryFiltrarExpedientesTitulo($cadenaTitulo))->getResult();
@@ -262,9 +276,8 @@ class ExpedienteController extends Controller {
         }
     }
     
-    public function buscarAvanzadoAction(){
-        $peticion = $this->getRequest();
-        
+    public function buscarAvanzadoAction(Request $peticion){
+         
         $paginador = $this->get('ideup.simple_paginator');
         $paginador->setItemsPerPage(9);
                     $em = $this->getDoctrine()->getManager();
@@ -359,6 +372,10 @@ class ExpedienteController extends Controller {
             else
                 $exp_info='<div class="expedientes_info">No se han encontrado expedientes que cumplan los criterios de búsqueda</div>';   
             
+            $descripcion = 'INFO: Expediente buscar avanzado: ';
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+            
             return $this->render('ExpedientesBundle:Expediente:index.html.twig', array(
                 'entities'  => $entities,
                 'paginador' => $paginador,
@@ -372,11 +389,9 @@ class ExpedienteController extends Controller {
         );
     }
     
-    public function pdfAction($id){
+    public function pdfAction(Expediente $expediente){
         
         $em = $this->getDoctrine()->getManager();
-        
-        $expediente = $em->getRepository('ExpedientesBundle:Expediente')->find($id);
         
         if (!$expediente) {
             throw $this->createNotFoundException('No existe este expediente');
@@ -400,13 +415,7 @@ class ExpedienteController extends Controller {
   
         $vestuario = $em->getRepository('MaterialBundle:MaterialVestuario')->findBy(array(
             'fkExpediente' => $expediente
-        ));
-        /*
-        return $this->render('ExpedientesBundle:Expediente:pdf.html.twig', array(
-            'expediente'   => $expediente,
-            'informatica'  => $informatica
-        ));*/
-                
+        ));              
         
         $html = $this->renderView('ExpedientesBundle:Expediente:pdf.html.twig', array(
             'expediente'   => $expediente,
@@ -420,6 +429,11 @@ class ExpedienteController extends Controller {
         $nombrePDF = 'Expediente_'.$expediente->getReferencia().'.pdf';
         $nombreFooter = 'Expediente - '. $expediente->getReferencia();
         
+        
+                    $descripcion = 'INFO: Expediente pdf, referencia: ' . $expediente->getReferencia();
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+            
         return new Response(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html,
                     array(
@@ -438,4 +452,40 @@ class ExpedienteController extends Controller {
             )
         );
     }
+    
+    public function eliminarAction(Request $request,Expediente $expediente){
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        if (!$expediente) {
+            throw $this->createNotFoundException('No existe este expediente');
+        }
+        
+        $formulario = $this->createFormBuilder(array('id' => $expediente->getId()))
+            ->add('id', 'hidden')
+            ->getForm();
+        
+        $formulario->handleRequest($request);
+
+        if ($formulario->isValid()) {
+
+            $flash = 'Expediente eliminado';
+            $this->get('session')->getFlashBag()->add('info', $flash);
+            
+            $descripcion = 'INFO: Expediente eliminado, referencia: ' . $expediente->getReferencia();
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+            
+            $em->remove($expediente);
+            $em->flush();
+                      
+            return $this->redirect($this->generateUrl('expediente_indice'));
+        }
+        
+          return $this->render('ExpedientesBundle:Expediente:eliminar.html.twig', array(
+            'expediente'    => $expediente,
+            'formulario'   => $formulario->createView()
+        )); 
+        
+    }    
 }

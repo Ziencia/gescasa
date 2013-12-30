@@ -9,8 +9,3 @@ empresa_new:
 empresa_edit:
     pattern:  /{id}/editar
     defaults: { _controller: "GestionBundle:infoTipoEmpresa:edit" }
-
-empresa_update:
-    pattern:  /{id}/actualizar
-    defaults: { _controller: "GestionBundle:infoTipoEmpresa:update" }
-    requirements: { _method: post|put }

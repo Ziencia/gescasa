@@ -1,0 +1,65 @@
+{% extends 'ExpedientesBundle:Expediente:expedientes.html.twig' %}
+{% form_theme formulario 'AdministracionBundle:Form:errores.html.twig' %}
+
+{% block id 'expediente_perfil' %}
+{% block title %}Información del usuario: {{usuario.tip}}{% endblock %}
+
+{% block contenido %}
+
+<h2>{{ block('title') }}</h2>
+<div class="limpiar"></div>
+
+<div class="formulario_registro_usuario">
+    <fieldset >
+        <legend>Datos</legend>
+        <div>
+            <label>Nombre:</label><label class="lbl_normal">{{usuario.nombre}}</label>
+        </div>
+        <div>
+            <label>Apellidos:</label><label class="lbl_normal">{{usuario.apellidos}}</label>
+        </div>
+        <div>
+            <label>DNI:</label><label class="lbl_normal">{{usuario.dni}}</label>
+        </div>
+        <div>
+            <label>Identificador:</label><label class="lbl_normal">{{usuario.tip}}</label>
+        </div>
+        <div>
+            <label>F. Alta:</label><label class="lbl_normal">{{usuario.fechaAlta|date("d/m/Y")}}</label>
+        </div>
+        <div>
+            <label>Rol:</label><label class="lbl_normal">{{usuario.roles[0]}}</label>
+        </div>
+    </fieldset>
+</div>
+<form action="{{ path('expediente_perfil') }}" method="post" {{form_enctype(formulario)}} class="formulario_registro_usuario">
+    {{ form_errors(formulario) }}
+<fieldset>
+            <legend>Cambio de contraseña</legend>
+            
+            <div>
+                {{ form_errors(formulario.old_password) }}
+                {{ form_label(formulario.old_password)  }}                
+                {{ form_widget(formulario.old_password, { 'attr': { 'class': 'formulario_input_password' } }) }}
+            </div>
+            <div>
+                {{ form_errors(formulario.new_password) }}            
+                {{ form_widget(formulario.new_password, { 'attr': { 'class': 'formulario_input_password' } }) }}
+                    <p class="ayuda">Deben de coincidir y mínimo de 6 carácteres.</p>
+            </div>
+            {{ form_rest(formulario) }}
+</fieldset>
+                <div class="contenedor_administrador_acciones">
+            <ul class="administrador_acciones">
+                <li>
+                    <input class="boton" type="submit" value="Guardar cambios" />
+                </li>
+                <li>
+                    <input type="button" value="Volver al listado" class="boton" onclick="window.location='{{ path('expediente_indice') }}';"/>               
+                </li>
+            </ul>
+            </div>
+</form>
+
+
+{% endblock %}

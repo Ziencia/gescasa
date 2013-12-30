@@ -26,6 +26,10 @@ class infoTipoAdjudicatarioController extends Controller
 
         $entities = $em->getRepository('GestionBundle:infoTipoAdjudicatario')->findBy(array(),array('descripcion'=>'ASC'));
 
+        $descripcion = 'INFO: Gestion, consulta de  adjudicatarios';
+        $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+        $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+           
         return $this->render('GestionBundle:infoTipoAdjudicatario:index.html.twig', array(
             'entities' => $entities,
         ));
