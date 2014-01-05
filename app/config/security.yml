@@ -24,7 +24,7 @@ security:
       - { path: ^/administracion/*,   roles: ROLE_SUPER_ADMIN }
       
     encoders:
-        Gestor\UsuarioBundle\Entity\Usuario: { algorithm: sha512, iterations: 10 }
+        Gestor\UsuarioBundle\Entity\Usuario: { algorithm: sha512, iterations: 50 }
 
     providers:
         usuarios:

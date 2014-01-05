@@ -3,7 +3,8 @@
 {% block stylesheets %}
         {% stylesheets '@UsuarioBundle/Resources/public/css/generico.css'
                        '@ExpedientesBundle/Resources/public/css/expedientes.css' 
-                        output='css/expedientes.css' filter='yui_css' %}
+                       '@MaterialBundle/Resources/public/css/material.css'
+                        filter='yui_css' %}
             <link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
         {% endstylesheets %}
 {% endblock %}

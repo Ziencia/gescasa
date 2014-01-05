@@ -30,7 +30,7 @@ class MaterialPolicialController extends Controller
             $flash = 'El material ha sido dado de alta';
             $this->get('session')->getFlashBag()->add('info', $flash);
             
-           $descripcion = 'INFO: Alta material policial. ID: ' .$material->getId() . ' Expediente ' . $expediente->getReferencia() ;
+           $descripcion = 'INFO: Alta material operativo. ID: ' .$material->getId() . ' Expediente ' . $expediente->getReferencia() ;
            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
            

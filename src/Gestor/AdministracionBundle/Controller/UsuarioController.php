@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Gestor\UsuarioBundle\Entity\Usuario;
 use \Gestor\AdministracionBundle\Form\UsuarioType;
 use \Gestor\AdministracionBundle\Form\UsuarioAdministracionType;
+use Gestor\MensajeBundle\Entity\Mensaje;
 
 class UsuarioController extends Controller {
 
@@ -19,6 +20,12 @@ class UsuarioController extends Controller {
         $entities  = $paginador->paginate(
             $em->getRepository('UsuarioBundle:Usuario')->queryTodosUsuarios())->getResult();
                
+        $descripcion = 'INFO: Administracion indice';
+        $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+        $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+        
+        $em->flush();
+        
         return $this->render('AdministracionBundle:Usuario:index.html.twig', array(
             'entities'  => $entities,
             'paginador' => $paginador,
@@ -51,8 +58,13 @@ class UsuarioController extends Controller {
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
+            
+            $descripcion = 'INFO: Administracion, nuevo usuario ' . $entity->getTip();
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+        
             $em->flush();
-
+        
             $this->get('session')->getFlashBag()->add('info', 'Usuario dado de alta con fecha ' . $entity->getFechaAlta()->format('d-m-yy'));
             
             return $this->redirect($this->generateUrl('administracion_usuario'));
@@ -73,6 +85,10 @@ class UsuarioController extends Controller {
        
         $deleteForm = $this->createDeleteForm($id);
 
+                    $descripcion = 'INFO: Administracion, consulta usuario ' . $usuario->getTip();
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+            
         return $this->render('AdministracionBundle:Usuario:ver.html.twig', array(
                     'entity' => $usuario,
                     'delete_form' => $deleteForm->createView(),
@@ -143,6 +159,11 @@ class UsuarioController extends Controller {
             $entity->setRoles($formulario['rol']->getData());
             
             $em->persist($entity);
+            
+                        $descripcion = 'INFO: Administracion, modificacion usuario ' . $entity->getTip();
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+            
             $em->flush();
 
             $flash = 'El usuario ha sido actualizado';
@@ -176,6 +197,10 @@ class UsuarioController extends Controller {
 
             $this->get('session')->getFlashBag()->add('info', 'Usuario '. $entity->getTIP() . ' dado de baja con fecha ' . $entity->getFechaAlta()->format('d-m-yy'));
                     
+                        $descripcion = 'INFO: Administracion, baja usuario ' . $entity->getTip();
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+            
             $em->remove($entity);
             $em->flush();
         }
@@ -201,6 +226,11 @@ class UsuarioController extends Controller {
             $entity->setAutorizado(true);
  
             $em->persist($entity);
+            
+                                    $descripcion = 'INFO: Administracion, usuario habilitado ' . $entity->getTip();
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+            
             $em->flush();
         }
         
@@ -228,6 +258,11 @@ class UsuarioController extends Controller {
             $entity->setAutorizado(false);
 
             $em->persist($entity);
+            
+                                    $descripcion = 'INFO: Administracion, usuario deshabilitado ' . $entity->getTip();
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+            
             $em->flush();
         }
         
@@ -253,6 +288,12 @@ class UsuarioController extends Controller {
 
         $entities  = $paginador->paginate(
             $em->getRepository('UsuarioBundle:Usuario')->queryUsuariosAutorizados())->getResult();
+        
+                                $descripcion = 'INFO: Administracion, listar autorizado';
+            $mensaje = new Mensaje($this->getUser()->getId(),new \DateTime(),$descripcion);
+            $em->getRepository('MensajeBundle:Mensaje')->altaMensaje($mensaje);
+            
+            $em->flush();
 
         return $this->render('AdministracionBundle:Usuario:index.html.twig', array(
             'entities'  => $entities,
@@ -261,27 +302,4 @@ class UsuarioController extends Controller {
         ));
     }
     
-    /*
-    private function getErrorMessages(\Symfony\Component\Form\Form $form) {
-    $errors = array();
-
-    foreach ($form->getErrors() as $key => $error) {
-            $errors[] = $error->getMessage();
-    }
-
-    foreach ($form->all() as $child) {
-        if (!$child->isValid()) {
-            $errors[$child->getName()] = $this->getErrorMessages($child);
-        }
-    }
-
-    return $errors;
-    }
-     *         if (!$form->isValid()){
-            $string = var_export($this->getErrorMessages($form), true);
-            $this->get('session')->getFlashBag()->add('info', 'No dado de baja '. $form->getErrorsAsString() . ' ' . $string);
-        }
-     * 
-     */
 }
-

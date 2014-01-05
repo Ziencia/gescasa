@@ -1,2 +1,4 @@
 
-"Bad credentials": "New message for Bad credentials"
+"Bad credentials": "El usuario y/o contraseña son incorrectos"
+
+"User account is disabled.": "Usuario deshabilitado, contacte con el administrador"

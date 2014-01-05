@@ -1,5 +1,5 @@
 body {
-    background: #036 url('/bundles/usuario/images/fondo.jpg') fixed center center repeat-y; 
+    background: #036 url('../bundles/usuario/images/fondo.jpg') fixed center center repeat-y; 
     font: 1em Verdana, Arial, Helvetica, sans-serif; 
     color:#333;
 }
@@ -26,7 +26,7 @@ h2,h3{
 }
 
 #banner{
-    background: #DBF1FF url('/bundles/usuario/images/banner.png') no-repeat top left;
+    background: #DBF1FF url('../bundles/usuario/images/bannerUned.png') no-repeat top left;
     background-color: #9CB8DD;
     border: 1px solid #0B5F89;
     font-size: 1.2em;

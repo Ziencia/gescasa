@@ -3,26 +3,48 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>GESTOR DE EXPEDIENTES - {{ "now"|date("Y") }} - Acceso a la aplicación</title>
-        {% stylesheets '@UsuarioBundle/Resources/public/css/login.css' output='css/login.css' filter='yui_css' %}
+        {% stylesheets '@UsuarioBundle/Resources/public/css/login.css' filter='yui_css' %}
             <link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
         {% endstylesheets %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
 <body>
 
+    
 <form id="login" action="{{path('usuario_login_check')}}" method="post">
     <h1> INICIO DE SESIÓN</h1>
         {% if error %}
-            <div>{{ error.message|trans }}</div>
+            <div class="error_login">{{ error.message|trans }}</div>
         {% endif %}
     <div id="inputs">
         <label hidden="hidden" for="username">Identificacion:</label><input type="text" id="username" placeholder="Identificación" autofocus required="required" name="_username" value="A11111A" />
         <label hidden="hidden" for="password">Password:</label><input type="password" id="password" placeholder="Contraseña" required="required" name="_password" value="A11111A" />
     </div>
     <div id="actions">
-        <a href="###">Aviso legal</a>
+        <a href="javascript:MostrarOcultar();">Aviso legal</a>
         <input type="submit" id="submit" value="Iniciar Sesión"/>
     </div>
 </form>
+    <div id="aviso_legal"> 
+        Esta aplicación es de uso restringido  <br>
+        Usted será responsable de los datos introducidos y/o modificados <br>
+        Todas las operaciones pueden ser auditadas <br>
+        Consulte las normas de uso y de protección de datos en la portada de la intranet <br><br>
+        <img src="{{ asset('bundles/usuario/images/html5.png') }}" alt="Validación HTML 5" title="Validación HTML 5"/>
+        <img src="{{ asset('bundles/usuario/images/wcag2AA.png') }}" alt="Validación HTML 5" title="Validación HTML 5"/>
+    </div>
+    
+    <script type="text/javascript">
+function MostrarOcultar() 
+{ 
+    if (document.getElementById) 
+    { 
+        var aux = document.getElementById('aviso_legal').style; 
+        aux.display = aux.display? "":"block"; 
+    } 
+} 
+</script> 
 </body>
 </html>
+
+

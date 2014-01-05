@@ -1,9 +1,4 @@
-{% extends 'ExpedientesBundle:Expediente:expedientes.html.twig' %}
-
-{% block stylesheets %}
-<link href="{{ asset('bundles/expedientes/css/expedientes.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('bundles/material/css/material.css') }}" rel="stylesheet" type="text/css" />
-{% endblock %}
+{% extends 'ExpedientesBundle:Expediente:expedientes.html.twig' %}            
 
 {% block id 'expediente_indice' %}
 {% block title %}Añadir material al expediente {{expediente_ref}}{% endblock %}
